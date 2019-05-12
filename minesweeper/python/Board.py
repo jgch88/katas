@@ -5,6 +5,9 @@ class Board:
     def view_board(self):
         return self._board
 
+    def mines_remaining(self):
+        return 10
+
     def _create_board(self, size):
         rows = size['rows']
         cols = size['cols']
