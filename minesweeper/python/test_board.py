@@ -136,7 +136,29 @@ class TestBoard(unittest.TestCase):
         board.reveal_position(position)
         self.assertEqual(board.is_game_over(), True)
 
+    def test_board_allows_cells_to_be_marked_as_mines(self):
+        size = {
+            'rows': 1,
+            'cols': 1
+        }
+        board = Board(size=size)
 
+        mines = [
+            {
+                'row': 0,
+                'col': 0
+            }
+        ]
+        board.add_mines(mines)
+
+        position = {
+            'row': 0,
+            'col': 0,
+        }
+        board.mark_mine(position)
+        self.assertEqual(board.view_board(),[
+            ['^']
+        ])
 
 if __name__ == '__main__':
     unittest.main()
