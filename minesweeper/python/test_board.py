@@ -61,6 +61,28 @@ class TestBoard(unittest.TestCase):
         board.add_mines(mines)
         self.assertEqual(board.mines_remaining(), 1)
 
+    def test_board_should_not_display_mines(self):
+        board = Board()
+        mines = [
+            {
+                'row': 0,
+                'col': 0
+            }
+        ]
+        board.add_mines(mines)
+        self.assertEqual(board.view_board(),[
+            [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+            [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+            [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+            [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+            [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+            [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+            [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+            [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+            [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+            [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+        ])
+
 
 if __name__ == '__main__':
     unittest.main()
