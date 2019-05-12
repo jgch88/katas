@@ -8,6 +8,9 @@ class Board:
     def mines_remaining(self):
         return 10
 
+    def add_mines(self, mines):
+        pass
+
     def _create_board(self, size):
         rows = size['rows']
         cols = size['cols']
