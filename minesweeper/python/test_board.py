@@ -50,5 +50,17 @@ class TestBoard(unittest.TestCase):
         ]
         board.add_mines(mines)
 
+    def test_board_shows_correct_number_of_mines_remaining(self):
+        board = Board()
+        mines = [
+            {
+                'row': 0,
+                'col': 0
+            }
+        ]
+        board.add_mines(mines)
+        self.assertEqual(board.mines_remaining(), 1)
+
+
 if __name__ == '__main__':
     unittest.main()
