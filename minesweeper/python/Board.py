@@ -34,6 +34,13 @@ class Board:
         if cell.actual_value() == '*':
             self._game_over = True
 
+    def toggle_mine_marking(self, position):
+        row = position['row']
+        col = position['col']
+        cell = self._board[row][col]
+        cell.toggle_mine_marking()
+
+
     def is_game_over(self):
         return self._game_over
 
