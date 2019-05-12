@@ -83,6 +83,33 @@ class TestBoard(unittest.TestCase):
             [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
         ])
 
+    def test_board_allows_cells_to_be_revealed(self):
+        size = {
+            'rows': 1,
+            'cols': 1
+        }
+        board = Board(size=size)
+
+        mines = [
+            {
+                'row': 0,
+                'col': 0
+            }
+        ]
+        board.add_mines(mines)
+        self.assertEqual(board.view_board(),[
+            [' ']
+        ])
+
+        position = {
+            'row': 0,
+            'col': 0,
+        }
+        board.reveal_position(position)
+        self.assertEqual(board.view_board(),[
+            ['*']
+        ])
+
 
 if __name__ == '__main__':
     unittest.main()
