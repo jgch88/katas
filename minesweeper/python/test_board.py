@@ -40,6 +40,15 @@ class TestBoard(unittest.TestCase):
         board = Board()
         self.assertEqual(board.mines_remaining(), 10)
 
+    def test_board_can_add_mines(self):
+        board = Board()
+        mines = [
+            {
+                'row': 0,
+                'col': 0
+            }
+        ]
+        board.add_mines(mines)
 
 if __name__ == '__main__':
     unittest.main()
