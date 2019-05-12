@@ -19,7 +19,10 @@ class TestBoard(unittest.TestCase):
         ])
 
     def test_board_initialises_with_size_options(self):
-        size = [1,1]
+        size = {
+            'rows': 1,
+            'cols': 1
+        }
         board = Board(size=size)
         self.assertEqual(board.view_board(),[
             [' ']
