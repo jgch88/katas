@@ -25,6 +25,11 @@ class Board:
             col = mine['col']
             self._board[row][col] = Cell('*')
 
+    def reveal_position(self, position):
+        row = position['row']
+        col = position['col']
+        self._board[row][col].reveal()
+
     def _create_board(self, size):
         rows = size['rows']
         cols = size['cols']
