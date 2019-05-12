@@ -2,6 +2,7 @@ from Cell import Cell
 
 class Board:
     def __init__(self, size={'rows': 10, 'cols': 10}):
+        self._game_over = False
         self._create_board(size)
 
     def view_board(self):
@@ -28,7 +29,14 @@ class Board:
     def reveal_position(self, position):
         row = position['row']
         col = position['col']
-        self._board[row][col].reveal()
+        cell = self._board[row][col]
+        cell.reveal()
+        if cell.actual_value() == '*':
+            self._game_over = True
+
+    def is_game_over(self):
+        return self._game_over
+
 
     def _create_board(self, size):
         rows = size['rows']
