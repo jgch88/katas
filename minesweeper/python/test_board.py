@@ -28,7 +28,13 @@ class TestBoard(unittest.TestCase):
             [' ']
         ])
 
-
+    def test_board_cannot_initialise_with_0_rows_or_cols(self):
+        size = {
+            'rows': 0,
+            'cols': 1
+        }
+        with self.assertRaises(ValueError):
+            board = Board(size=size)
 
 if __name__ == '__main__':
     unittest.main()
