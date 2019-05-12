@@ -110,6 +110,33 @@ class TestBoard(unittest.TestCase):
             ['*']
         ])
 
+    def test_board_starts_as_not_game_over(self):
+        board = Board()
+        self.assertEqual(board.is_game_over(), False)
+
+    def test_board_revealing_a_bomb_causes_game_over(self):
+        size = {
+            'rows': 2,
+            'cols': 2
+        }
+        board = Board(size=size)
+
+        mines = [
+            {
+                'row': 0,
+                'col': 0
+            }
+        ]
+        board.add_mines(mines)
+
+        position = {
+            'row': 0,
+            'col': 0,
+        }
+        board.reveal_position(position)
+        self.assertEqual(board.is_game_over(), True)
+
+
 
 if __name__ == '__main__':
     unittest.main()
