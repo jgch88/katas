@@ -3,7 +3,7 @@ class Cell:
         self._value = value
         self._revealed = False
 
-    def displayed_value(self):
+    def display_value(self):
         return ' '
 
     def actual_value(self):

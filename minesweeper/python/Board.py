@@ -7,7 +7,7 @@ class Board:
     def view_board(self):
         displayed_board = []
         for row in self._board:
-            displayed_row = list(map(lambda cell: cell.displayed_value(), row))
+            displayed_row = list(map(lambda cell: cell.display_value(), row))
             displayed_board.append(displayed_row)
         return displayed_board
 
