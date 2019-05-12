@@ -24,3 +24,17 @@ Board Notation:
 '1' - 1 neighbour is a mine
 '*' - a mine
 '^' - marked mine
+
+Minesweeper responsibilities:
+- instantiate board / timer
+
+Board responsibilities:
+- store cells on a board
+- instantiate cell roles
+- display board
+- game over status
+
+Cell responsibilities:
+- display depending on revealed/unrevealed state
+- toggle reveal
+- mark bomb
