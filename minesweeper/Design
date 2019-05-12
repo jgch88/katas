@@ -1,0 +1,18 @@
+Minesweeper class
+
+To create a self contained Minesweeper game
+
+Requirements
+
+V1
+User can
+- (command) create a new game
+- (query) view the board
+
+V2
+- (query) view the number of mines remaining
+- (command) reveal a tile
+- (command) mark a mine on the board
+
+V3
+- (query) view the time elapsed since the game started
