@@ -8,5 +8,7 @@ class Board:
     def _create_board(self, size):
         rows = size['rows']
         cols = size['cols']
+        if rows < 1 or cols < 1:
+            raise ValueError('Both rows and columns must be at least 1.')
         self._board = [[' ' for c in range(cols)] for r in range(rows)]
 
