@@ -6,10 +6,19 @@ class Board:
         return self._board
 
     def mines_remaining(self):
-        return 10
+        mines = 0
+        for row in self._board:
+            for col in row:
+                for mine in col:
+                    if mine == '*':
+                        mines += 1
+        return mines
 
     def add_mines(self, mines):
-        pass
+        for mine in mines:
+            row = mine['row']
+            col = mine['col']
+            self._board[row][col] = '*'
 
     def _create_board(self, size):
         rows = size['rows']

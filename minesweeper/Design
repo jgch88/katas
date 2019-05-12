@@ -16,3 +16,11 @@ V2
 
 V3
 - (query) view the time elapsed since the game started
+
+
+Board Notation:
+' ' - unrevealed tile
+'.' - revealed tile
+'1' - 1 neighbour is a mine
+'*' - a mine
+'^' - marked mine

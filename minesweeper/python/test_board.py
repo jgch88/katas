@@ -38,7 +38,7 @@ class TestBoard(unittest.TestCase):
 
     def test_board_shows_number_of_mines_remaining(self):
         board = Board()
-        self.assertEqual(board.mines_remaining(), 10)
+        self.assertEqual(board.mines_remaining(), 0);
 
     def test_board_can_add_mines(self):
         board = Board()
