@@ -13,6 +13,7 @@ V2
 - (query) view the number of mines remaining
 - (command) reveal a tile
 - (command) mark a mine on the board
+- (query) check whether the game is over
 
 V3
 - (query) view the time elapsed since the game started
