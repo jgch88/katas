@@ -28,6 +28,9 @@ class Cell:
     def is_marked(self):
         return self._marked
 
+    def is_bomb(self):
+        return self._value == '*'
+
     def has_bombs_around(self, number_of_bombs):
         self._value = number_of_bombs
 

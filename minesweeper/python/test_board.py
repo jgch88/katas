@@ -270,6 +270,7 @@ class TestBoard(unittest.TestCase):
                 'col': 0
             },
         ]
+        board.add_mines(mines)
         board.reveal_position({
             'row': 1,
             'col': 1,
@@ -280,13 +281,13 @@ class TestBoard(unittest.TestCase):
         ])
 
         # Test case 2
-        size = {
+        size2 = {
             'rows': 3,
             'cols': 3
         }
-        board = Board(size=size)
+        board2 = Board(size=size2)
 
-        mines = [
+        mines2 = [
             {
                 'row': 0,
                 'col': 0
@@ -320,11 +321,12 @@ class TestBoard(unittest.TestCase):
                 'col': 2
             },
         ]
-        board.reveal_position({
+        board2.add_mines(mines2)
+        board2.reveal_position({
             'row': 1,
             'col': 1,
         })
-        self.assertEqual(board.view_board(), [
+        self.assertEqual(board2.view_board(), [
             [' ', ' ', ' '],
             [' ',  8 , ' '],
             [' ', ' ', ' '],
