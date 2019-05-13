@@ -187,6 +187,31 @@ class TestBoard(unittest.TestCase):
         self.assertEqual(board.view_board(),[
             [' ']
         ])
+
+    def test_board_revealing_all_tiles_and_marking_all_mines_causes_game_over(self):
+        size = {
+            'rows': 1,
+            'cols': 1
+        }
+        board = Board(size=size)
+
+        mines = [
+            {
+                'row': 0,
+                'col': 0
+            }
+        ]
+        board.add_mines(mines)
+
+        position = {
+            'row': 0,
+            'col': 0,
+        }
+        board.toggle_mine_marking(position)
+        self.assertEqual(board.view_board(),[
+            ['^']
+        ])
+        self.assertEqual(board.is_game_over(), True)
         
 
 if __name__ == '__main__':
