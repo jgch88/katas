@@ -332,6 +332,30 @@ class TestBoard(unittest.TestCase):
             [' ', ' ', ' '],
         ])
 
+    def test_board_revealing_a_tile_will_also_reveal_neighbouring_tiles_until_they_reach_a_mine(self):
+        size = {
+            'rows': 3,
+            'cols': 3
+        }
+        board = Board(size=size)
+
+        mines = [
+            {
+                'row': 0,
+                'col': 0
+            },
+        ]
+        board.add_mines(mines)
+        board.reveal_position({
+            'row': 2,
+            'col': 2,
+        })
+        self.assertEqual(board.view_board(), [
+            [' ',  1 , '.'],
+            [ 1 ,  1 , '.'],
+            ['.', '.', '.'],
+        ])
+
 
 if __name__ == '__main__':
     unittest.main()
