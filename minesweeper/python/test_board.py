@@ -279,6 +279,57 @@ class TestBoard(unittest.TestCase):
             [' ', 3]
         ])
 
+        # Test case 2
+        size = {
+            'rows': 3,
+            'cols': 3
+        }
+        board = Board(size=size)
+
+        mines = [
+            {
+                'row': 0,
+                'col': 0
+            },
+            {
+                'row': 0,
+                'col': 1
+            },
+            {
+                'row': 0,
+                'col': 2
+            },
+            {
+                'row': 1,
+                'col': 0
+            },
+            {
+                'row': 1,
+                'col': 2
+            },
+            {
+                'row': 2,
+                'col': 0
+            },
+            {
+                'row': 2,
+                'col': 1
+            },
+            {
+                'row': 2,
+                'col': 2
+            },
+        ]
+        board.reveal_position({
+            'row': 1,
+            'col': 1,
+        })
+        self.assertEqual(board.view_board(), [
+            [' ', ' ', ' '],
+            [' ',  8 , ' '],
+            [' ', ' ', ' '],
+        ])
+
 
 if __name__ == '__main__':
     unittest.main()
