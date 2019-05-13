@@ -249,5 +249,36 @@ class TestBoard(unittest.TestCase):
         })
         self.assertEqual(board.status(), 'Lose')
 
+    def test_board_revealing_a_tile_beside_a_bomb_displays_how_many_bombs_are_around_it(self):
+        size = {
+            'rows': 2,
+            'cols': 2
+        }
+        board = Board(size=size)
+
+        mines = [
+            {
+                'row': 0,
+                'col': 0
+            },
+            {
+                'row': 0,
+                'col': 1
+            },
+            {
+                'row': 1,
+                'col': 0
+            },
+        ]
+        board.reveal_position({
+            'row': 1,
+            'col': 1,
+        })
+        self.assertEqual(board.view_board(), [
+            [' ', ' '],
+            [' ', '3']
+        ])
+
+
 if __name__ == '__main__':
     unittest.main()
