@@ -2,7 +2,7 @@ from Cell import Cell
 
 class Board:
     def __init__(self, size={'rows': 10, 'cols': 10}):
-        self._game_over = False
+        self._status = 'Playing'
         self._create_board(size)
 
     def view_board(self):
@@ -32,7 +32,7 @@ class Board:
         cell = self._board[row][col]
         cell.reveal()
         if cell.actual_value() == '*':
-            self._game_over = True
+            self._status = 'Lose'
 
     def toggle_mine_marking(self, position):
         row = position['row']
@@ -40,11 +40,10 @@ class Board:
         cell = self._board[row][col]
         cell.toggle_mine_marking()
 
-
-    def is_game_over(self):
-        if (self._all_cells_are_revealed_or_marked_as_mines()):
-            self._game_over = True
-        return self._game_over
+    def status(self):
+        if (self._all_cells_are_revealed_or_marked_as_mines() and self._status != 'Lose'):
+            self._status = 'Win'
+        return self._status
 
     def _all_cells_are_revealed_or_marked_as_mines(self):
         for row in self._board:
