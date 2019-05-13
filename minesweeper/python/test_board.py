@@ -112,7 +112,7 @@ class TestBoard(unittest.TestCase):
 
     def test_board_starts_as_not_game_over(self):
         board = Board()
-        self.assertEqual(board.is_game_over(), False)
+        self.assertEqual(board.status(), 'Playing')
 
     def test_board_revealing_a_bomb_causes_game_over(self):
         size = {
@@ -134,7 +134,7 @@ class TestBoard(unittest.TestCase):
             'col': 0,
         }
         board.reveal_position(position)
-        self.assertEqual(board.is_game_over(), True)
+        self.assertEqual(board.status(), 'Lose')
 
     def test_board_allows_cells_to_be_marked_as_mines(self):
         size = {
@@ -211,8 +211,43 @@ class TestBoard(unittest.TestCase):
         self.assertEqual(board.view_board(),[
             ['^']
         ])
-        self.assertEqual(board.is_game_over(), True)
-        
+        self.assertEqual(board.status(), 'Win')
+
+    def test_board_revealing_all_tiles_and_marking_all_mines_correctly_causes_game_over(self):
+        size = {
+            'rows': 2,
+            'cols': 2
+        }
+        board = Board(size=size)
+
+        mines = [
+            {
+                'row': 0,
+                'col': 0
+            },
+            {
+                'row': 1,
+                'col': 1
+            },
+        ]
+        board.add_mines(mines)
+        board.toggle_mine_marking({
+            'row': 0,
+            'col': 0,
+        })
+        board.toggle_mine_marking({
+            'row': 0,
+            'col': 1,
+        })
+        board.reveal_position({
+            'row': 1,
+            'col': 0,
+        })
+        board.reveal_position({
+            'row': 1,
+            'col': 1,
+        })
+        self.assertEqual(board.status(), 'Lose')
 
 if __name__ == '__main__':
     unittest.main()
