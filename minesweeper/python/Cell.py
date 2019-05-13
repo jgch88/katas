@@ -19,6 +19,12 @@ class Cell:
     def reveal(self):
         self._revealed = True
 
+    def is_revealed(self):
+        return self._revealed
+
+    def is_marked(self):
+        return self._marked
+
     def toggle_mine_marking(self):
         if self._marked:
             self._marked = False

@@ -42,8 +42,16 @@ class Board:
 
 
     def is_game_over(self):
+        if (self._all_cells_are_revealed_or_marked_as_mines()):
+            self._game_over = True
         return self._game_over
 
+    def _all_cells_are_revealed_or_marked_as_mines(self):
+        for row in self._board:
+            for cell in row:
+                if not (cell.is_revealed() or cell.is_marked()):
+                    return False
+        return True
 
     def _create_board(self, size):
         rows = size['rows']
