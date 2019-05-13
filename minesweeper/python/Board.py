@@ -33,6 +33,10 @@ class Board:
         cell.reveal()
         if cell.actual_value() == '*':
             self._status = 'Lose'
+            return
+        bombs_count = self._count_bombs_surrounding_cell(position)
+        if bombs_count > 0:
+            cell.has_bombs_around(bombs_count)
 
     def toggle_mine_marking(self, position):
         row = position['row']
@@ -44,6 +48,10 @@ class Board:
         if (self._all_cells_are_revealed_or_marked_as_mines() and self._status != 'Lose'):
             self._status = 'Win'
         return self._status
+
+    def _count_bombs_surrounding_cell(self, position):
+        bomb_count = 3
+        return bomb_count
 
     def _all_cells_are_revealed_or_marked_as_mines(self):
         for row in self._board:

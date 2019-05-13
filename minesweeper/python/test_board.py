@@ -276,7 +276,7 @@ class TestBoard(unittest.TestCase):
         })
         self.assertEqual(board.view_board(), [
             [' ', ' '],
-            [' ', '3']
+            [' ', 3]
         ])
 
 
