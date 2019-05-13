@@ -13,6 +13,12 @@ class TestCell(unittest.TestCase):
         cell.reveal()
         self.assertEqual(cell.display_value(), '*')
 
+    def test_blank_cell_shows_dot_when_revealed(self):
+        cell = Cell(' ')
+        self.assertEqual(cell.display_value(), ' ')
+        cell.reveal()
+        self.assertEqual(cell.display_value(), '.')
+
     def test_cell_can_be_marked_as_a_mine(self):
         cell = Cell('*')
         cell.toggle_mine_marking()

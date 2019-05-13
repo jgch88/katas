@@ -21,7 +21,7 @@ V3
 
 Board Notation:
 ' ' - unrevealed tile
-'.' - revealed tile
+'.' - revealed blank tile
 '1' - 1 neighbour is a mine
 '*' - a mine
 '^' - marked mine
