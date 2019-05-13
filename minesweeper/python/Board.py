@@ -31,12 +31,23 @@ class Board:
         col = position['col']
         cell = self._board[row][col]
         cell.reveal()
-        if cell.actual_value() == '*':
+        if cell.is_bomb():
             self._status = 'Lose'
             return
         bombs_count = self._count_bombs_surrounding_cell(position)
         if bombs_count > 0:
             cell.has_bombs_around(bombs_count)
+            return
+        neighbour_positions_to_reveal = self._get_valid_neighbours(position)
+        # remove bombs
+        neighbour_positions_to_reveal = list(filter(lambda p: not self._board[p['row']][p['col']].is_bomb(), neighbour_positions_to_reveal))
+        # remove already revealed cells
+        neighbour_positions_to_reveal = list(filter(lambda p: not self._board[p['row']][p['col']].is_revealed(), neighbour_positions_to_reveal))
+        while len(neighbour_positions_to_reveal) > 0:
+            self.reveal_position(neighbour_positions_to_reveal[0])
+            neighbour_positions_to_reveal.pop(0)
+
+
 
     def toggle_mine_marking(self, position):
         row = position['row']
