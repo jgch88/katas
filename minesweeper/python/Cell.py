@@ -11,6 +11,9 @@ class Cell:
         if not (self._revealed):
             return ' '
 
+        if (self._value == ' '):
+            return '.'
+
         return self._value
 
     def actual_value(self):
