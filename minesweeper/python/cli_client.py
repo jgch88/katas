@@ -13,20 +13,30 @@ def print_commands():
 
 def process_input(input):
     split_input = input.split()
-    command = split_input[0]
-    row = int(split_input[1])
-    col = int(split_input[2])
-    if command == 'h':
-        print_commands()
-    elif command == 'r':
-        minesweeper.reveal({'row':row,'col':col})
-    elif command == 'lr':
-        minesweeper.mass_reveal({'row':row,'col':col})
-    elif command == 'm':
-        minesweeper.toggle_mine_marking({'row':row,'col':col})
-    elif command == 's':
-        minesweeper.new_game()
-    else:
+    try:
+        if len(split_input) == 1:
+            command = split_input[0]
+            if command == 'h':
+                print_commands()
+            elif command == 's':
+                minesweeper.new_game()
+            else:
+                raise Error('Invalid Command')
+        elif len(split_input) == 3:
+            command = split_input[0]
+            row = int(split_input[1])
+            col = int(split_input[2])
+            if command == 'r':
+                minesweeper.reveal({'row':row,'col':col})
+            elif command == 'lr':
+                minesweeper.mass_reveal({'row':row,'col':col})
+            elif command == 'm':
+                minesweeper.toggle_mine_marking({'row':row,'col':col})
+            else:
+                raise Error('Invalid Command')
+        else:
+            raise Error('Command should have either 1 or 3 arguments')
+    except:
         print("Didn't understand that command")
         print_commands()
 
