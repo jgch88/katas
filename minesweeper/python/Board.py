@@ -45,6 +45,7 @@ class Board:
         if cell.is_bomb():
             self._status = 'Lose'
             self._reveal_all_mines()
+            self._cross_out_wrongly_marked_cells()
             return
         bombs_count = self._count_bombs_surrounding_cell(position)
         if bombs_count > 0:
@@ -94,6 +95,14 @@ class Board:
             col = mine['col']
             cell = self._board[row][col]
             cell.reveal()
+
+    def _cross_out_wrongly_marked_cells(self):
+        for row in self._board:
+            for cell in row:
+                if cell.is_marked() and not cell.is_bomb():
+                    cell.toggle_mine_marking()
+                    cell.has_bombs_around('X')
+                    cell.reveal()
 
     def _generate_mines(self):
         rows = len(self._board)
