@@ -3,6 +3,8 @@ from Board import Board
 
 class TestBoard(unittest.TestCase):
 
+    maxDiff = None
+
     def test_board_initialises_with_size_10x10(self):
         board = Board()
         self.assertEqual(board.view_board(),[
@@ -357,19 +359,31 @@ class TestBoard(unittest.TestCase):
         ])
 
         # Test case 2
-        size = { 'rows': 3,'cols': 3 }
+        size = { 'rows': 8,'cols': 10 }
         board = Board(size=size)
         mines = [
-            { 'row': 0, 'col': 0 },
-            { 'row': 0, 'col': 1 },
-            { 'row': 1, 'col': 0 },
+            { 'row': 0, 'col': 4 },
+            { 'row': 0, 'col': 6 },
+            { 'row': 0, 'col': 7 },
+            { 'row': 2, 'col': 9 },
+            { 'row': 3, 'col': 5 },
+            { 'row': 4, 'col': 6 },
+            { 'row': 5, 'col': 0 },
+            { 'row': 5, 'col': 6 },
+            { 'row': 6, 'col': 6 },
+            { 'row': 7, 'col': 0 },
         ]
         board.add_mines(mines)
-        board.reveal_position({ 'row': 2, 'col': 2 })
+        board.reveal_position({ 'row': 0, 'col': 0 })
         self.assertEqual(board.view_board(), [
-            [' ', ' ',  1 ],
-            [' ',  3 ,  1 ],
-            [ 1 ,  1 , '.'],
+            ['.', '.', '.',  1 , ' ', ' ', ' ', ' ', ' ', ' '],
+            ['.', '.', '.',  1 ,  1 , ' ', ' ', ' ', ' ', ' '],
+            ['.', '.', '.', '.',  1 , ' ', ' ', ' ', ' ', ' '],
+            ['.', '.', '.', '.',  1 , ' ', ' ', ' ', ' ', ' '],
+            [ 1 ,  1 , '.', '.',  1 ,  3 , ' ', ' ', ' ', ' '],
+            [' ',  1 , '.', '.', '.',  3 , ' ', ' ', ' ', ' '],
+            [' ',  2 , '.', '.', '.',  2 , ' ', ' ', ' ', ' '],
+            [' ',  1 , '.', '.', '.',  1 , ' ', ' ', ' ', ' '],
         ])
 
 
