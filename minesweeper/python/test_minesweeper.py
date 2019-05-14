@@ -26,7 +26,7 @@ class TestMinesweeper(unittest.TestCase):
             [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
         ])
 
-    def test_starting_a_new_game_has_10_mines_by_default(self):
+    def test_query_mines_remaining(self):
         minesweeper = Minesweeper()
         minesweeper.new_game()
         self.assertEqual(minesweeper.mines_remaining(), 10)
@@ -38,6 +38,13 @@ class TestMinesweeper(unittest.TestCase):
             'row': 0,
             'col': 0
         })
+
+    def test_mass_reveal_position(self):
+        minesweeper = Minesweeper()
+        minesweeper.new_game()
+        minesweeper.reveal({'row': 0,'col': 0})
+        minesweeper.mass_reveal({'row': 0,'col': 0})
+
 
 
 if __name__ == '__main__':
