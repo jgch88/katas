@@ -211,6 +211,19 @@ class TestBoard(unittest.TestCase):
         board.reveal_position({ 'row': 0, 'col': 0 })
         self.assertEqual(board.status(), 'Playing') # shouldn't be 'Lose', because nothing should happen when revealing a marked tile
 
+    def test_board_cannot_mark_an_already_revealed_cell(self):
+        size = { 'rows': 2,'cols': 2 }
+        board = Board(size=size)
+        mines = [
+            { 'row': 0, 'col': 0 },
+        ]
+        board.add_mines(mines)
+        board.reveal_position({ 'row': 1, 'col': 1 })
+        board.toggle_mine_marking({ 'row': 1, 'col': 1 })
+        self.assertEqual(board.view_board(), [
+            [ ' ', ' ' ],
+            [ ' ',  1  ]
+        ])
 
     def test_board_revealing_all_tiles_and_marking_all_mines_causes_game_over(self):
         size = {
