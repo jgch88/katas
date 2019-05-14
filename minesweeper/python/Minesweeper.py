@@ -22,3 +22,6 @@ class Minesweeper:
 
     def mass_reveal(self, position):
         self._board.mass_reveal_around_position(position)
+
+    def toggle_mine_marking(self, position):
+        self._board.toggle_mine_marking(position)
