@@ -37,8 +37,6 @@ class Board:
         bombs_count = self._count_bombs_surrounding_cell(position)
         if bombs_count > 0:
             cell.has_bombs_around(bombs_count)
-        # if has bombs north/south/east/west, return, else reveal the surrounding neighbours
-        if self._has_bombs_north_south_east_west(position):
             return
         neighbour_positions_to_reveal = self._get_valid_neighbours(position)
         # remove bombs
@@ -48,8 +46,6 @@ class Board:
         while len(neighbour_positions_to_reveal) > 0:
             self.reveal_position(neighbour_positions_to_reveal[0])
             neighbour_positions_to_reveal.pop(0)
-
-
 
     def toggle_mine_marking(self, position):
         row = position['row']
@@ -61,18 +57,6 @@ class Board:
         if (self._all_cells_are_revealed_or_marked_as_mines() and self._status != 'Lose'):
             self._status = 'Win'
         return self._status
-
-    def _has_bombs_north_south_east_west(self, position):
-        bomb_count = 0
-        valid_neighbours = self._get_north_south_east_west_neighbours(position)
-        for neighbour_position in valid_neighbours:
-            row = neighbour_position['row']
-            col = neighbour_position['col']
-            cell = self._board[row][col]
-            if (cell.is_bomb()):
-                bomb_count += 1
-        return bomb_count > 0
-
 
     def _count_bombs_surrounding_cell(self, position):
         # get valid neighbours
@@ -87,18 +71,6 @@ class Board:
                 bomb_count += 1
         return bomb_count
 
-    def _get_north_south_east_west_neighbours(self, position):
-        row = position['row']
-        col = position['col']
-        positions = [
-                { 'row': row - 1, 'col': col },
-                { 'row': row + 1, 'col': col },
-                { 'row': row, 'col': col - 1 },
-                { 'row': row, 'col': col + 1 }
-        ]
-        valid_positions = list(filter(lambda p: p['row'] >= 0 and p['row'] < len(self._board) and p['col'] >= 0 and p['col'] < len(self._board[0]), positions)) # exclude out of bounds positions
-        return valid_positions
-
     def _get_valid_neighbours(self, position):
         row = position['row']
         col = position['col']
@@ -110,8 +82,6 @@ class Board:
         valid_positions = list(filter(lambda p: p['row'] != row or p['col'] != col, valid_positions)) # exclude current position
 
         return valid_positions
-        
-
 
     def _all_cells_are_revealed_or_marked_as_mines(self):
         for row in self._board:
