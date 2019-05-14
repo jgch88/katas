@@ -14,11 +14,14 @@ class Board:
 
     def mines_remaining(self):
         mines = 0
+        cells_marked_as_mines = 0
         for row in self._board:
             for cell in row:
                 if cell.is_bomb():
                     mines += 1
-        return mines
+                if cell.is_marked():
+                    cells_marked_as_mines += 1
+        return mines - cells_marked_as_mines
 
     def add_mines(self, mines):
         for mine in mines:
