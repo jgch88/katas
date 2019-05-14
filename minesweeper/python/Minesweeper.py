@@ -19,3 +19,6 @@ class Minesweeper:
 
     def reveal(self, position):
         self._board.reveal_position(position)
+
+    def mass_reveal(self, position):
+        self._board.mass_reveal_around_position(position)
