@@ -52,6 +52,12 @@ class Board:
             self.reveal_position(neighbour_positions_to_reveal[0])
             neighbour_positions_to_reveal.pop(0)
 
+    def mass_reveal_around_position(self, position):
+        valid_neighbours = self._get_valid_neighbours(position)
+        for neighbour_position in valid_neighbours:
+            self.reveal_position(neighbour_position)
+
+
     def toggle_mine_marking(self, position):
         row = position['row']
         col = position['col']
