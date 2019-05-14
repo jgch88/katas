@@ -50,6 +50,12 @@ class TestMinesweeper(unittest.TestCase):
         minesweeper.new_game()
         minesweeper.toggle_mine_marking({'row': 0,'col': 0})
 
+    def test_query_game_status(self):
+        minesweeper = Minesweeper()
+        minesweeper.new_game()
+        self.assertEqual(minesweeper.status(), 'Playing')
+
+
 
 if __name__ == '__main__':
     unittest.main()
