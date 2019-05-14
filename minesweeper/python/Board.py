@@ -1,3 +1,5 @@
+from math import sqrt
+from random import randint
 from Cell import Cell
 
 class Board:
@@ -23,7 +25,9 @@ class Board:
                     cells_marked_as_mines += 1
         return mines - cells_marked_as_mines
 
-    def add_mines(self, mines):
+    def add_mines(self, mines=None):
+        if mines is None: # couldn't do mines=self._generate_mines() in the method signature
+            mines = self._generate_mines()
         for mine in mines:
             row = mine['row']
             col = mine['col']
@@ -80,6 +84,29 @@ class Board:
         if (self._all_cells_are_revealed_or_marked_as_mines() and self._status != 'Lose'):
             self._status = 'Win'
         return self._status
+
+    def _generate_mines(self):
+        rows = len(self._board)
+        cols = len(self._board[0])
+        mines_to_generate = round(sqrt(rows * cols))
+        mine_list = []
+        mines = set() # use a set to make sure it is unique
+        
+        while len(mines) != mines_to_generate:
+            row = randint(0, rows - 1)
+            col = randint(0, cols - 1)
+            position = {
+                'row': row,
+                'col': col
+            }
+
+            prev_mines_length = len(mines)
+            mines.add((row,col))
+            new_mines_length = len(mines)
+
+            if prev_mines_length != new_mines_length:
+                mine_list.append(position)
+        return mine_list
 
     def _count_marked_neighbours_surrounding_cell(self, position):
         marked_count = 0

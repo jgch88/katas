@@ -1,5 +1,6 @@
 import unittest
 from Board import Board
+from math import sqrt
 
 class TestBoard(unittest.TestCase):
 
@@ -547,7 +548,7 @@ class TestBoard(unittest.TestCase):
         size = { 'rows': 8,'cols': 10 }
         board = Board(size=size)
         board.add_mines()
-        self.assertEqual(board.mines_remaining(), round(Math.sqrt(8*10)))
+        self.assertEqual(board.mines_remaining(), round(sqrt(8*10)))
 
 
 
