@@ -32,6 +32,8 @@ class Board:
             row = mine['row']
             col = mine['col']
             self._board[row][col] = Cell('*')
+        self._mine_positions = mines
+
 
     def reveal_position(self, position):
         row = position['row']
@@ -42,6 +44,7 @@ class Board:
         cell.reveal()
         if cell.is_bomb():
             self._status = 'Lose'
+            self._reveal_all_mines()
             return
         bombs_count = self._count_bombs_surrounding_cell(position)
         if bombs_count > 0:
@@ -84,6 +87,13 @@ class Board:
         if (self._all_cells_are_revealed_or_marked_as_mines() and self._status != 'Lose'):
             self._status = 'Win'
         return self._status
+
+    def _reveal_all_mines(self):
+        for mine in self._mine_positions:
+            row = mine['row']
+            col = mine['col']
+            cell = self._board[row][col]
+            cell.reveal()
 
     def _generate_mines(self):
         rows = len(self._board)
