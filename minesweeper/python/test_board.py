@@ -509,6 +509,19 @@ class TestBoard(unittest.TestCase):
             [' ', ' '],
         ])
 
+    def test_cannot_mass_reveal_a_marked_cell(self):
+        size = { 'rows': 2,'cols': 2 }
+        board = Board(size=size)
+        mines = [
+            { 'row': 0, 'col': 0 },
+        ]
+        board.add_mines(mines)
+        board.toggle_mine_marking({ 'row': 0, 'col': 0 })
+        board.mass_reveal_around_position({ 'row': 0, 'col': 0 })
+        self.assertEqual(board.view_board(), [
+            ['^', ' '],
+            [' ', ' '],
+        ])
 
 
 if __name__ == '__main__':
