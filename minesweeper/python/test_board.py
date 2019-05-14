@@ -550,6 +550,35 @@ class TestBoard(unittest.TestCase):
         board.add_mines()
         self.assertEqual(board.mines_remaining(), round(sqrt(8*10)))
 
+    def test_bombs_reveal_themselves_when_game_is_lost(self):
+        size = { 'rows': 2,'cols': 2 }
+        board = Board(size=size)
+        mines = [
+            { 'row': 0, 'col': 0 },
+            { 'row': 0, 'col': 1 },
+        ]
+        board.add_mines(mines)
+        board.reveal_position({ 'row': 0, 'col': 0 })
+        self.assertEqual(board.view_board(), [
+            ['*', '*'],
+            [' ', ' '],
+        ])
+
+    def test_wrongly_marked_cells_are_shown_as_X_when_game_is_lost(self):
+        size = { 'rows': 2,'cols': 2 }
+        board = Board(size=size)
+        mines = [
+            { 'row': 0, 'col': 0 },
+            { 'row': 0, 'col': 1 },
+        ]
+        board.add_mines(mines)
+        board.toggle_mine_marking({ 'row': 0, 'col': 0 })
+        board.toggle_mine_marking({ 'row': 1, 'col': 0 })
+        board.reveal_position({ 'row': 0, 'col': 1 })
+        self.assertEqual(board.view_board(), [
+            ['^', '*'],
+            ['X', ' '],
+        ])
 
 
 if __name__ == '__main__':

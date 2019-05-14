@@ -31,8 +31,8 @@ class Cell:
     def is_bomb(self):
         return self._value == '*'
 
-    def has_bombs_around(self, number_of_bombs):
-        self._value = number_of_bombs
+    def set_display_value(self, display_value):
+        self._value = display_value
 
     def toggle_mine_marking(self):
         if self._marked:
