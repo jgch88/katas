@@ -31,6 +31,15 @@ class TestMinesweeper(unittest.TestCase):
         minesweeper.new_game()
         self.assertEqual(minesweeper.mines_remaining(), 10)
 
+    def test_command_reveal_position(self):
+        minesweeper = Minesweeper()
+        minesweeper.new_game()
+        minesweeper.reveal({
+            'row': 0,
+            'col': 0
+        })
+        print(minesweeper.view_board())
+
 
 if __name__ == '__main__':
     unittest.main()
