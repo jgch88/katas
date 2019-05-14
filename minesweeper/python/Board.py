@@ -49,7 +49,7 @@ class Board:
             return
         bombs_count = self._count_bombs_surrounding_cell(position)
         if bombs_count > 0:
-            cell.has_bombs_around(bombs_count)
+            cell.set_display_value(bombs_count)
             return
         neighbour_positions_to_reveal = self._get_valid_neighbours(position)
         # remove bombs
@@ -101,7 +101,7 @@ class Board:
             for cell in row:
                 if cell.is_marked() and not cell.is_bomb():
                     cell.toggle_mine_marking()
-                    cell.has_bombs_around('X')
+                    cell.set_display_value('X')
                     cell.reveal()
 
     def _generate_mines(self):
