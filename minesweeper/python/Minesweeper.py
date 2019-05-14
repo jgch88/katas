@@ -16,3 +16,6 @@ class Minesweeper:
 
     def mines_remaining(self):
         return self._board.mines_remaining()
+
+    def reveal(self, position):
+        self._board.reveal_position(position)

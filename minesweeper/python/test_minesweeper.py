@@ -38,7 +38,6 @@ class TestMinesweeper(unittest.TestCase):
             'row': 0,
             'col': 0
         })
-        print(minesweeper.view_board())
 
 
 if __name__ == '__main__':
