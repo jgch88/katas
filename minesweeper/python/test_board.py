@@ -523,6 +523,21 @@ class TestBoard(unittest.TestCase):
             [' ', ' '],
         ])
 
+    def test_cannot_mass_reveal_a_cell_if_there_are_insufficient_marked_mines_around_it(self):
+        size = { 'rows': 2,'cols': 2 }
+        board = Board(size=size)
+        mines = [
+            { 'row': 0, 'col': 0 },
+        ]
+        board.add_mines(mines)
+
+        board.reveal_position({ 'row': 1, 'col': 1 })
+        board.mass_reveal_around_position({ 'row': 1, 'col': 1 })
+        self.assertEqual(board.view_board(), [
+            [' ', ' '],
+            [' ',  1 ],
+        ])
+
 
 if __name__ == '__main__':
     unittest.main()
