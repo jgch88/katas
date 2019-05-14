@@ -538,6 +538,18 @@ class TestBoard(unittest.TestCase):
             [' ',  1 ],
         ])
 
+    def test_board_creates_random_mines_equal_to_floor_of_square_root_of_number_of_tiles_by_default(self):
+        size = { 'rows': 2,'cols': 2 }
+        board = Board(size=size)
+        board.add_mines()
+        self.assertEqual(board.mines_remaining(), 2)
+
+        size = { 'rows': 8,'cols': 10 }
+        board = Board(size=size)
+        board.add_mines()
+        self.assertEqual(board.mines_remaining(), round(Math.sqrt(8*10)))
+
+
 
 if __name__ == '__main__':
     unittest.main()
