@@ -26,5 +26,11 @@ class TestMinesweeper(unittest.TestCase):
             [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
         ])
 
+    def test_starting_a_new_game_has_10_mines_by_default(self):
+        minesweeper = Minesweeper()
+        minesweeper.new_game()
+        self.assertEqual(minesweeper.mines_remaining(), 10)
+
+
 if __name__ == '__main__':
     unittest.main()
