@@ -52,6 +52,22 @@ class Board:
             self.reveal_position(neighbour_positions_to_reveal[0])
             neighbour_positions_to_reveal.pop(0)
 
+    def mass_reveal_around_position(self, position):
+        row = position['row']
+        col = position['col']
+        cell = self._board[row][col]
+        if not cell.is_revealed():
+            return
+
+        marked_count = self._count_marked_neighbours_surrounding_cell(position)
+        if marked_count != cell.actual_value():
+            return
+
+        valid_neighbours = self._get_valid_neighbours(position)
+        for neighbour_position in valid_neighbours:
+            self.reveal_position(neighbour_position)
+
+
     def toggle_mine_marking(self, position):
         row = position['row']
         col = position['col']
@@ -64,6 +80,18 @@ class Board:
         if (self._all_cells_are_revealed_or_marked_as_mines() and self._status != 'Lose'):
             self._status = 'Win'
         return self._status
+
+    def _count_marked_neighbours_surrounding_cell(self, position):
+        marked_count = 0
+        valid_neighbours = self._get_valid_neighbours(position)
+        for neighbour_position in valid_neighbours:
+            row = neighbour_position['row']
+            col = neighbour_position['col']
+            cell = self._board[row][col]
+            if (cell.is_marked()):
+                marked_count += 1
+        return marked_count
+
 
     def _count_bombs_surrounding_cell(self, position):
         # get valid neighbours

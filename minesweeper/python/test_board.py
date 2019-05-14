@@ -478,6 +478,66 @@ class TestBoard(unittest.TestCase):
 
         self.assertEqual(board.status(), 'Win')
 
+    def test_mass_reveal_will_reveal_all_cells_around_current_cell(self):
+        size = { 'rows': 2,'cols': 2 }
+        board = Board(size=size)
+        mines = [
+            { 'row': 0, 'col': 0 },
+        ]
+        board.add_mines(mines)
+        board.toggle_mine_marking({ 'row': 0, 'col': 0 })
+        board.reveal_position({ 'row': 1, 'col': 1 })
+
+        board.mass_reveal_around_position({ 'row': 1, 'col': 1 })
+        self.assertEqual(board.view_board(), [
+            ['^', 1 ],
+            [ 1 , 1 ],
+        ])
+
+    def test_cannot_mass_reveal_an_unrevealed_cell(self):
+        size = { 'rows': 2,'cols': 2 }
+        board = Board(size=size)
+        mines = [
+            { 'row': 0, 'col': 0 },
+        ]
+        board.add_mines(mines)
+        board.toggle_mine_marking({ 'row': 0, 'col': 0 })
+
+        board.mass_reveal_around_position({ 'row': 1, 'col': 1 })
+        self.assertEqual(board.view_board(), [
+            ['^', ' '],
+            [' ', ' '],
+        ])
+
+    def test_cannot_mass_reveal_a_marked_cell(self):
+        size = { 'rows': 2,'cols': 2 }
+        board = Board(size=size)
+        mines = [
+            { 'row': 0, 'col': 0 },
+        ]
+        board.add_mines(mines)
+        board.toggle_mine_marking({ 'row': 0, 'col': 0 })
+        board.mass_reveal_around_position({ 'row': 0, 'col': 0 })
+        self.assertEqual(board.view_board(), [
+            ['^', ' '],
+            [' ', ' '],
+        ])
+
+    def test_cannot_mass_reveal_a_cell_if_there_are_insufficient_marked_mines_around_it(self):
+        size = { 'rows': 2,'cols': 2 }
+        board = Board(size=size)
+        mines = [
+            { 'row': 0, 'col': 0 },
+        ]
+        board.add_mines(mines)
+
+        board.reveal_position({ 'row': 1, 'col': 1 })
+        board.mass_reveal_around_position({ 'row': 1, 'col': 1 })
+        self.assertEqual(board.view_board(), [
+            [' ', ' '],
+            [' ',  1 ],
+        ])
+
 
 if __name__ == '__main__':
     unittest.main()

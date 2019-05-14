@@ -15,6 +15,9 @@ V2
 - (command) mark a mine on the board
 - (query) check whether the game is over
 
+V2.5
+- (command) left+right click concept: mass_reveal
+
 V3
 - (query) view the time elapsed since the game started
 
