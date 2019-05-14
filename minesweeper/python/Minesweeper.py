@@ -25,3 +25,6 @@ class Minesweeper:
 
     def toggle_mine_marking(self, position):
         self._board.toggle_mine_marking(position)
+
+    def status(self):
+        return self._board.status()
