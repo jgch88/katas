@@ -397,6 +397,7 @@ class TestBoard(unittest.TestCase):
         ])
 
     def test_board_plays_a_full_game_correctly(self):
+        # almost an 'end-to-end' test
         size = { 'rows': 8,'cols': 10 }
         board = Board(size=size)
         mines = [
@@ -414,6 +415,43 @@ class TestBoard(unittest.TestCase):
         board.add_mines(mines)
         board.reveal_position({ 'row': 0, 'col': 0 })
         self.assertEqual(board.status(), 'Playing')
+        self.assertEqual(board.mines_remaining(), 10)
+        board.toggle_mine_marking({ 'row': 5, 'col': 0 })
+        self.assertEqual(board.mines_remaining(), 9)
+        board.reveal_position({ 'row': 6, 'col': 0 })
+        board.toggle_mine_marking({ 'row': 7, 'col': 0 })
+        self.assertEqual(board.mines_remaining(), 8)
+        board.toggle_mine_marking({ 'row': 0, 'col': 4 })
+        board.reveal_position({ 'row': 0, 'col': 5 })
+        board.reveal_position({ 'row': 1, 'col': 5 })
+        board.reveal_position({ 'row': 2, 'col': 5 })
+
+        board.toggle_mine_marking({ 'row': 3, 'col': 5 })
+        board.reveal_position({ 'row': 1, 'col': 6 })
+        board.reveal_position({ 'row': 2, 'col': 6 })
+        board.reveal_position({ 'row': 3, 'col': 6 })
+
+        board.toggle_mine_marking({ 'row': 0, 'col': 6 })
+        board.reveal_position({ 'row': 2, 'col': 7 })
+
+        board.toggle_mine_marking({ 'row': 0, 'col': 7 })
+        board.reveal_position({ 'row': 0, 'col': 8 })
+        board.reveal_position({ 'row': 0, 'col': 9 })
+        board.reveal_position({ 'row': 1, 'col': 9 })
+
+        board.toggle_mine_marking({ 'row': 2, 'col': 9 })
+        board.reveal_position({ 'row': 3, 'col': 9 })
+        board.reveal_position({ 'row': 4, 'col': 9 })
+
+        board.toggle_mine_marking({ 'row': 4, 'col': 6 })
+
+        board.toggle_mine_marking({ 'row': 5, 'col': 6 })
+
+        board.toggle_mine_marking({ 'row': 6, 'col': 6 })
+        self.assertEqual(board.mines_remaining(), 0)
+        board.reveal_position({ 'row': 7, 'col': 6 })
+
+        self.assertEqual(board.status(), 'Win')
 
 
 if __name__ == '__main__':
