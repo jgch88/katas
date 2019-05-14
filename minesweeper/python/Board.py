@@ -33,6 +33,8 @@ class Board:
         row = position['row']
         col = position['col']
         cell = self._board[row][col]
+        if cell.is_marked():
+            return
         cell.reveal()
         if cell.is_bomb():
             self._status = 'Lose'
