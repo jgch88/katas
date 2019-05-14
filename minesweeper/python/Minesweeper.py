@@ -1,15 +1,17 @@
 from Board import Board
+from Timer import Timer
 
 class Minesweeper:
     """
     The Minesweeper game engine API
     """
     def __init__(self):
-        pass
+        self._timer = Timer()
 
     def new_game(self):
         self._board = Board()
         self._board.add_mines()
+        self._timer.start()
 
     def view_board(self):
         return self._board.view_board()
@@ -28,3 +30,6 @@ class Minesweeper:
 
     def status(self):
         return self._board.status()
+
+    def time_elapsed(self):
+        return self._timer.seconds_elapsed()

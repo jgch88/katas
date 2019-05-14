@@ -55,6 +55,11 @@ class TestMinesweeper(unittest.TestCase):
         minesweeper.new_game()
         self.assertEqual(minesweeper.status(), 'Playing')
 
+    def test_query_time_elapsed(self):
+        minesweeper = Minesweeper()
+        minesweeper.new_game()
+        self.assertEqual(minesweeper.time_elapsed(), 0)
+
 
 
 if __name__ == '__main__':
