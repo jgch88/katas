@@ -42,6 +42,16 @@ class TestBoard(unittest.TestCase):
         board = Board()
         self.assertEqual(board.mines_remaining(), 0);
 
+    def test_board_shows_number_of_mines_remaining_correctly_after_marking_mines(self):
+        board = Board()
+        mines = [{ 'row': 0, 'col': 0 }]
+        board.add_mines(mines)
+        self.assertEqual(board.mines_remaining(), 1);
+        board.toggle_mine_marking({ 'row': 0, 'col': 0 })
+        self.assertEqual(board.mines_remaining(), 0);
+        board.toggle_mine_marking({ 'row': 1, 'col': 0 })
+        self.assertEqual(board.mines_remaining(), -1);
+
     def test_board_can_add_mines(self):
         board = Board()
         mines = [
@@ -385,6 +395,25 @@ class TestBoard(unittest.TestCase):
             [' ',  2 , '.', '.', '.',  2 , ' ', ' ', ' ', ' '],
             [' ',  1 , '.', '.', '.',  1 , ' ', ' ', ' ', ' '],
         ])
+
+    def test_board_plays_a_full_game_correctly(self):
+        size = { 'rows': 8,'cols': 10 }
+        board = Board(size=size)
+        mines = [
+            { 'row': 0, 'col': 4 },
+            { 'row': 0, 'col': 6 },
+            { 'row': 0, 'col': 7 },
+            { 'row': 2, 'col': 9 },
+            { 'row': 3, 'col': 5 },
+            { 'row': 4, 'col': 6 },
+            { 'row': 5, 'col': 0 },
+            { 'row': 5, 'col': 6 },
+            { 'row': 6, 'col': 6 },
+            { 'row': 7, 'col': 0 },
+        ]
+        board.add_mines(mines)
+        board.reveal_position({ 'row': 0, 'col': 0 })
+        self.assertEqual(board.status(), 'Playing')
 
 
 if __name__ == '__main__':
