@@ -56,6 +56,8 @@ class Board:
         row = position['row']
         col = position['col']
         cell = self._board[row][col]
+        if cell.is_revealed():
+            return
         cell.toggle_mine_marking()
 
     def status(self):
