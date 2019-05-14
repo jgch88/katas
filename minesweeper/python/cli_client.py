@@ -1,20 +1,23 @@
 from Minesweeper import Minesweeper
 
+def print_commands():
+    print('Command Usage:')
+    print('---Reveal a cell---')
+    print('r <row> <column>')
+    print('---Mass reveal a cell---')
+    print('lr <row> <column>')
+    print('---Mark/unmark a mine---')
+    print('m <row> <column>')
+    print('---Start a new game---')
+    print('s')
+
 def process_input(input):
     split_input = input.split()
     command = split_input[0]
     row = int(split_input[1])
     col = int(split_input[2])
     if command == 'h':
-        print('Command Usage:')
-        print('---Reveal a cell---')
-        print('r <row> <column>')
-        print('---Mass reveal a cell---')
-        print('lr <row> <column>')
-        print('---Mark/unmark a mine---')
-        print('m <row> <column>')
-        print('---Start a new game---')
-        print('s')
+        print_commands()
     elif command == 'r':
         minesweeper.reveal({'row':row,'col':col})
     elif command == 'lr':
@@ -25,21 +28,23 @@ def process_input(input):
         minesweeper.new_game()
     else:
         print("Didn't understand that command")
-        print('Command Usage:')
-        print('---Reveal a cell---')
-        print('r <row> <column>')
-        print('---Mass reveal a cell---')
-        print('m <row> <column>')
-        print('---Toggle mine marking---')
-        print('t <row> <column>')
-        print('---Start a new game---')
-        print('s')
+        print_commands()
 
 
 def pretty_print_board(board):
-    for row in board:
+    horizontal_padding = ' '
+    column_label = horizontal_padding
+    for i in range(len(board[0])):
+        column_label += horizontal_padding
+        column_label += str(i)
+
+    print(column_label)
+
+    for vertical_index, row in enumerate(board):
         result = ''
+        result += str(vertical_index)
         for col in row:
+            result += horizontal_padding
             result += str(col)
         print(result)
 
@@ -47,7 +52,7 @@ def pretty_print_board(board):
 minesweeper = Minesweeper()
 minesweeper.new_game()
 print('Welcome to Minesweeper')
-print('type h for help')
+print_commands()
 while minesweeper.status() == 'Playing':
     print('Game Status:', minesweeper.status())
     print('Mines left:', minesweeper.mines_remaining())
@@ -57,6 +62,8 @@ while minesweeper.status() == 'Playing':
 
 if minesweeper.status() == 'Lose':
     pretty_print_board(minesweeper.view_board())
+    print('Mines left:', minesweeper.mines_remaining())
+    print('Time Elapsed:', minesweeper.time_elapsed())
     print('BOOM')
 
 if minesweeper.status() == 'Win':
