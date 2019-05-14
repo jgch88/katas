@@ -53,6 +53,11 @@ class Board:
             neighbour_positions_to_reveal.pop(0)
 
     def mass_reveal_around_position(self, position):
+        row = position['row']
+        col = position['col']
+        cell = self._board[row][col]
+        if not cell.is_revealed():
+            return
         valid_neighbours = self._get_valid_neighbours(position)
         for neighbour_position in valid_neighbours:
             self.reveal_position(neighbour_position)
