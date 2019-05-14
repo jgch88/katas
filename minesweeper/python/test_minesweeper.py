@@ -39,12 +39,16 @@ class TestMinesweeper(unittest.TestCase):
             'col': 0
         })
 
-    def test_mass_reveal_position(self):
+    def test_command_mass_reveal_position(self):
         minesweeper = Minesweeper()
         minesweeper.new_game()
         minesweeper.reveal({'row': 0,'col': 0})
         minesweeper.mass_reveal({'row': 0,'col': 0})
 
+    def test_command_toggle_mine_marking(self):
+        minesweeper = Minesweeper()
+        minesweeper.new_game()
+        minesweeper.toggle_mine_marking({'row': 0,'col': 0})
 
 
 if __name__ == '__main__':
