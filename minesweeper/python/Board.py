@@ -16,7 +16,7 @@ class Board:
         mines = 0
         for row in self._board:
             for cell in row:
-                if cell.actual_value() == '*':
+                if cell.is_bomb():
                     mines += 1
         return mines
 
