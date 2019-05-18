@@ -51,4 +51,13 @@ class Cell {
     }
   }
 
+  String actual_value() {
+    return this._value;
+  }
+
+  // for debugging
+  toString() {
+    return this._value;
+  }
+
 }
