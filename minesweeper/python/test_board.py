@@ -226,7 +226,7 @@ class TestBoard(unittest.TestCase):
             [ ' ',  1  ]
         ])
 
-    def test_board_revealing_all_tiles_and_marking_all_mines_causes_game_over(self):
+    def test_board_revealing_all_tiles_and_marking_all_mines_wins_the_game(self):
         size = {
             'rows': 1,
             'cols': 1
@@ -250,42 +250,6 @@ class TestBoard(unittest.TestCase):
             ['^']
         ])
         self.assertEqual(board.status(), 'Win')
-
-    def test_board_revealing_all_tiles_and_marking_all_mines_correctly_causes_game_over(self):
-        size = {
-            'rows': 2,
-            'cols': 2
-        }
-        board = Board(size=size)
-
-        mines = [
-            {
-                'row': 0,
-                'col': 0
-            },
-            {
-                'row': 1,
-                'col': 1
-            },
-        ]
-        board.add_mines(mines)
-        board.toggle_mine_marking({
-            'row': 0,
-            'col': 0,
-        })
-        board.toggle_mine_marking({
-            'row': 0,
-            'col': 1,
-        })
-        board.reveal_position({
-            'row': 1,
-            'col': 0,
-        })
-        board.reveal_position({
-            'row': 1,
-            'col': 1,
-        })
-        self.assertEqual(board.status(), 'Lose')
 
     def test_board_revealing_a_tile_beside_a_bomb_displays_how_many_bombs_are_around_it(self):
         size = {
