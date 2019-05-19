@@ -229,23 +229,33 @@ class Board {
       Random rand = Random();
       int row = rand.nextInt(rows);
       int col = rand.nextInt(cols);
-      var position = {
-        'row': row,
-        'col': col
-      };
+      Position position = Position(row, col);
 
-      // This doesn't work the same way as python
-      // there are no tuples in dart...
       int prev_mines_length = mines.length;
       mines.add(position);
       int new_mines_length = mines.length;
 
       if (prev_mines_length != new_mines_length) {
-        mine_list.add(position);
+        mine_list.add({
+          'row': row,
+          'col': col
+        });
       }
     }
 
     return mine_list;
   }
 
+}
+
+// Created a Position class to define equality of Position instances
+// via Object.== and hashCode
+// https://medium.com/@ayushpguptaapg/demystifying-and-hashcode-in-dart-2f328d1ab1bc
+class Position {
+  final int row;
+  final int col;
+  Position(row, col) : row=row, col=col;
+
+  bool operator ==(o) => o is Position && o.row == row && o.col == col;
+  int get hashCode => row.hashCode^col.hashCode;
 }
