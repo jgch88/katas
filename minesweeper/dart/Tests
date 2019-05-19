@@ -1,0 +1,1 @@
+pub run test test_*.dart
