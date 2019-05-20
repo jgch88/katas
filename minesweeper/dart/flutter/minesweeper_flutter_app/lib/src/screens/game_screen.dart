@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../blocs/gamestate_provider.dart';
 
 class GameScreen extends StatelessWidget {
   final int timeElapsedInSeconds = 0;
@@ -28,32 +29,38 @@ class GameScreen extends StatelessWidget {
 
 
   Widget build(BuildContext context) {
-    return drawScreen();
+    final bloc = GamestateProvider.of(context);
+    return drawScreen(bloc);
   }
 
-  Widget drawScreen() {
+  Widget drawScreen(GamestateBloc bloc) {
     return Column(
       children: <Widget>[
-        drawInfoPanel(),
+        drawInfoPanel(bloc),
         Expanded(
-          child: drawBoard(),
+          child: drawBoard(bloc),
         ),
       ],
     );
   }
 
-  Widget drawInfoPanel() {
-    return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-        Text('Mines Remaining: $dummyMinesRemaining'),
-        Text('Time Elapsed: $dummyTimeElapsed'),
-        Text('Status: $dummyGameStatus'),
-      ]
+  Widget drawInfoPanel(GamestateBloc bloc) {
+    return StreamBuilder(
+      stream: bloc.timer,
+      builder: (context, AsyncSnapshot<int> snapshot) {
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            Text('Mines Remaining: $dummyMinesRemaining'),
+            Text('Time Elapsed: ${snapshot.data}'),
+            Text('Status: $dummyGameStatus'),
+          ]
+        );
+      }
     );
   }
 
-  Widget drawBoard() {
+  Widget drawBoard(GamestateBloc bloc) {
     int rows = dummyBoardData.length;
     int cols = dummyBoardData[0].length;
     int cellCount = rows * cols;
