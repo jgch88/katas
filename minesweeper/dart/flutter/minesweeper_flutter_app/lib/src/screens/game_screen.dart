@@ -3,6 +3,26 @@ import 'package:flutter/material.dart';
 class GameScreen extends StatelessWidget {
   final int timeElapsedInSeconds = 0;
   final List<List<String>> displayedBoardData = [];
+  final List<List<String>> dummyData =
+  /*
+  [
+    [' ', ' '],
+    [' ', ' '],
+  ];
+  */
+  [
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+  ];
+
 
   Widget build(BuildContext context) {
     return drawScreen();
@@ -30,16 +50,21 @@ class GameScreen extends StatelessWidget {
   }
 
   Widget drawBoard() {
+    int rows = dummyData.length;
+    int cols = dummyData[0].length;
+    int cellCount = rows * cols;
     return GridView.count(
-      crossAxisCount: 10,
-      children: List.generate(100, (index) {
+      crossAxisCount: rows,
+      children: List.generate(cellCount, (index) {
+        int row = (index / rows).floor();
+        int col = index.remainder(rows);
         return Center(
           child: Text(
-            '$index'
+            '${dummyData[row][col]}'
           )
         );
       }),
-
     );
   }
 }
+
