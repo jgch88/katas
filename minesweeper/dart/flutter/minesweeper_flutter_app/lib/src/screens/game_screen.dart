@@ -4,9 +4,6 @@ import '../blocs/gamestate_provider.dart';
 class GameScreen extends StatelessWidget {
   final int timeElapsedInSeconds = 0;
   final List<List<String>> displayedBoardData = [];
-  final int dummyMinesRemaining = 10;
-  final int dummyTimeElapsed = 100;
-  final String dummyGameStatus = 'Playing';
   final List<List<String>> dummyBoardData =
   /*
   [
