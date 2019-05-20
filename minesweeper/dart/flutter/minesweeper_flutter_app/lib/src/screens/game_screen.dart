@@ -93,17 +93,29 @@ class GameScreen extends StatelessWidget {
             children: List.generate(cellCount, (index) {
               int row = (index / rows).floor();
               int col = index.remainder(rows);
-              return Container(
-                margin: EdgeInsets.all(1),
-                padding: EdgeInsets.all(1),
-                decoration: BoxDecoration(
-                    border: Border.all(color: Colors.teal)
-                ),
-                child: Center (
-                  child: Text(
-                      '${snapshot.data[row][col]}'
+              Map position = {'row': row, 'col': col};
+              return GestureDetector(
+                child: Container(
+                  margin: EdgeInsets.all(1),
+                  padding: EdgeInsets.all(1),
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.teal)
+                  ),
+                  child: Center (
+                    child: Text(
+                        '${snapshot.data[row][col]}'
+                    ),
                   ),
                 ),
+                onLongPress: () {
+                  bloc.reveal(position);
+                },
+                onTap: () {
+                  bloc.toggleMineMarking(position);
+                },
+                onDoubleTap: () {
+                  bloc.massReveal(position);
+                },
               );
             }),
           );

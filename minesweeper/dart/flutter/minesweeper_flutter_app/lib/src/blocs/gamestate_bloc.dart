@@ -27,6 +27,27 @@ class GamestateBloc {
     });
   }
 
+  reveal(position) {
+    _minesweeper.reveal(position);
+    _gameStatus.sink.add(_minesweeper.status());
+    _minesRemaining.sink.add(_minesweeper.mines_remaining());
+    _board.sink.add(_minesweeper.view_board());
+  }
+
+  toggleMineMarking(position) {
+    _minesweeper.toggle_mine_marking(position);
+    _gameStatus.sink.add(_minesweeper.status());
+    _minesRemaining.sink.add(_minesweeper.mines_remaining());
+    _board.sink.add(_minesweeper.view_board());
+  }
+
+  massReveal(position) {
+    _minesweeper.mass_reveal(position);
+    _gameStatus.sink.add(_minesweeper.status());
+    _minesRemaining.sink.add(_minesweeper.mines_remaining());
+    _board.sink.add(_minesweeper.view_board());
+  }
+
   dispose() {
     _minesRemaining.close();
     _timer.close();
