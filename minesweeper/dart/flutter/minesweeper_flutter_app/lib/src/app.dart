@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import './domain/Minesweeper.dart';
+import './screens/game_screen.dart';
 
 class App extends StatelessWidget {
   Widget build(BuildContext context) {
@@ -11,26 +11,12 @@ class App extends StatelessWidget {
           title: Text('Minesweeper'),
         ),
         body: Center(
-            child: MinesweeperUI(),
+            child: GameScreen(),
         )
       ),
       theme: ThemeData(
         primarySwatch: Colors.teal,
       ),
     );
-  }
-}
-
-class MinesweeperUI extends StatefulWidget {
-  @override
-  MinesweeperUIState createState() => MinesweeperUIState();
-}
-
-class MinesweeperUIState extends State<MinesweeperUI> {
-  @override
-  Widget build(BuildContext context) {
-    Minesweeper minesweeper = Minesweeper();
-    minesweeper.new_game();
-    return Text(minesweeper.time_elapsed().toString());
   }
 }
