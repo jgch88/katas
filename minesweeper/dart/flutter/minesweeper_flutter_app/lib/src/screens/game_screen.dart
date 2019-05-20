@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 class GameScreen extends StatelessWidget {
   final int timeElapsedInSeconds = 0;
   final List<List<String>> displayedBoardData = [];
-  final List<List<String>> dummyData =
+  final int dummyMinesRemaining = 10;
+  final int dummyTimeElapsed = 100;
+  final String dummyGameStatus = 'Playing';
+  final List<List<String>> dummyBoardData =
   /*
   [
     [' ', ' '],
@@ -41,27 +44,36 @@ class GameScreen extends StatelessWidget {
 
   Widget drawInfoPanel() {
     return Row(
-      children: <Widget>[
-        Text('Mines Remaining: 10'),
-        Text('Time Elapsed: 0'),
-        Text('Status: Playing'),
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+        Text('Mines Remaining: $dummyMinesRemaining'),
+        Text('Time Elapsed: $dummyTimeElapsed'),
+        Text('Status: $dummyGameStatus'),
       ]
     );
   }
 
   Widget drawBoard() {
-    int rows = dummyData.length;
-    int cols = dummyData[0].length;
+    int rows = dummyBoardData.length;
+    int cols = dummyBoardData[0].length;
     int cellCount = rows * cols;
     return GridView.count(
       crossAxisCount: rows,
+      childAspectRatio: 1,
       children: List.generate(cellCount, (index) {
         int row = (index / rows).floor();
         int col = index.remainder(rows);
-        return Center(
-          child: Text(
-            '${dummyData[row][col]}'
-          )
+        return Container(
+          margin: EdgeInsets.all(1),
+          padding: EdgeInsets.all(1),
+          decoration: BoxDecoration(
+              border: Border.all(color: Colors.teal)
+          ),
+          child: Center (
+            child: Text(
+                '${dummyBoardData[row][col]}'
+            ),
+          ),
         );
       }),
     );
