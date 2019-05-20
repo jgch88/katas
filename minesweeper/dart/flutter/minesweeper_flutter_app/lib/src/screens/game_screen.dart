@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../blocs/gamestate_provider.dart';
+import '../widgets/cell.dart';
 
 class GameScreen extends StatelessWidget {
 
@@ -88,9 +89,7 @@ class GameScreen extends StatelessWidget {
                       border: Border.all(color: Colors.teal)
                   ),
                   child: Center (
-                    child: Text(
-                        '${snapshot.data[row][col]}'
-                    ),
+                    child: Cell(displayedValue:'${snapshot.data[row][col]}'),
                   ),
                 ),
                 onLongPress: () {
@@ -117,12 +116,10 @@ class GameScreen extends StatelessWidget {
   Widget drawRestartGameButton(GamestateBloc bloc) {
     return Center(
       child:FloatingActionButton(
-        child: IconButton(
-          icon: Icon(Icons.refresh),
-          onPressed: () {
-            bloc.newGame();
-          },
-        ),
+        child: Icon(Icons.refresh),
+        onPressed: () {
+          bloc.newGame();
+        },
       ),
     );
   }
