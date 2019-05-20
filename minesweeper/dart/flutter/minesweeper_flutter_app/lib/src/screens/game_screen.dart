@@ -63,45 +63,56 @@ class GameScreen extends StatelessWidget {
 
   Widget drawTimer(GamestateBloc bloc) {
     return StreamBuilder(
-        stream: bloc.timer,
-        builder: (context, AsyncSnapshot<int> snapshot) {
-          return Text('Time Elapsed: ${snapshot.data}');
-        }
+      stream: bloc.timer,
+      builder: (context, AsyncSnapshot<int> snapshot) {
+        return Text('Time Elapsed: ${snapshot.data}');
+      }
     );
   }
 
   Widget drawGameStatus(GamestateBloc bloc) {
     return StreamBuilder(
-        stream: bloc.gameStatus,
-        builder: (context, AsyncSnapshot<String> snapshot) {
-          return Text('Status: ${snapshot.data}');
-        }
+      stream: bloc.gameStatus,
+      builder: (context, AsyncSnapshot<String> snapshot) {
+        return Text('Status: ${snapshot.data}');
+      }
     );
   }
 
   Widget drawBoard(GamestateBloc bloc) {
-    int rows = dummyBoardData.length;
-    int cols = dummyBoardData[0].length;
-    int cellCount = rows * cols;
-    return GridView.count(
-      crossAxisCount: rows,
-      childAspectRatio: 1,
-      children: List.generate(cellCount, (index) {
-        int row = (index / rows).floor();
-        int col = index.remainder(rows);
-        return Container(
-          margin: EdgeInsets.all(1),
-          padding: EdgeInsets.all(1),
-          decoration: BoxDecoration(
-              border: Border.all(color: Colors.teal)
-          ),
-          child: Center (
-            child: Text(
-                '${dummyBoardData[row][col]}'
-            ),
-          ),
-        );
-      }),
+    return StreamBuilder(
+      stream: bloc.board,
+      builder: (context, AsyncSnapshot<List<List<String>>> snapshot) {
+        if (snapshot.hasData) {
+          int rows = snapshot.data.length;
+          int cols = snapshot.data[0].length;
+          int cellCount = rows * cols;
+          return GridView.count(
+            crossAxisCount: rows,
+            childAspectRatio: 1,
+            children: List.generate(cellCount, (index) {
+              int row = (index / rows).floor();
+              int col = index.remainder(rows);
+              return Container(
+                margin: EdgeInsets.all(1),
+                padding: EdgeInsets.all(1),
+                decoration: BoxDecoration(
+                    border: Border.all(color: Colors.teal)
+                ),
+                child: Center (
+                  child: Text(
+                      '${snapshot.data[row][col]}'
+                  ),
+                ),
+              );
+            }),
+          );
+        } else {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+      },
     );
   }
 }
