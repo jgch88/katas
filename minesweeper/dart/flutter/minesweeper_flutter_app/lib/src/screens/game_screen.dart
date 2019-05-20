@@ -2,28 +2,6 @@ import 'package:flutter/material.dart';
 import '../blocs/gamestate_provider.dart';
 
 class GameScreen extends StatelessWidget {
-  final int timeElapsedInSeconds = 0;
-  final List<List<String>> displayedBoardData = [];
-  final List<List<String>> dummyBoardData =
-  /*
-  [
-    [' ', ' '],
-    [' ', ' '],
-  ];
-  */
-  [
-    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-  ];
-
 
   Widget build(BuildContext context) {
     final bloc = GamestateProvider.of(context);
