@@ -9,12 +9,12 @@ class App extends StatelessWidget {
          title: 'Minesweeper',
          initialRoute: '/',
          home: Scaffold(
-             appBar: AppBar(
-               title: Text('Minesweeper'),
-             ),
-             body: Center(
-               child: GameScreen(),
-             )
+           appBar: AppBar(
+             title: Text('Minesweeper'),
+           ),
+           body: Center(
+             child: GameScreen(),
+           ),
          ),
          theme: ThemeData(
            primarySwatch: Colors.teal,

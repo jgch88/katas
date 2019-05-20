@@ -11,9 +11,17 @@ class GameScreen extends StatelessWidget {
   Widget drawScreen(GamestateBloc bloc) {
     return Column(
       children: <Widget>[
-        drawInfoPanel(bloc),
         Expanded(
+          flex: 1,
+          child: drawInfoPanel(bloc),
+        ),
+        Expanded(
+          flex: 7,
           child: drawBoard(bloc),
+        ),
+        Expanded(
+          flex: 2,
+          child: drawRestartGameButton(bloc),
         ),
       ],
     );
@@ -103,6 +111,19 @@ class GameScreen extends StatelessWidget {
           );
         }
       },
+    );
+  }
+
+  Widget drawRestartGameButton(GamestateBloc bloc) {
+    return Center(
+      child:FloatingActionButton(
+        child: IconButton(
+          icon: Icon(Icons.refresh),
+          onPressed: () {
+            bloc.newGame();
+          },
+        ),
+      ),
     );
   }
 }
