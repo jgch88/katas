@@ -1,0 +1,7 @@
+Column
+    Row (Info Panel)
+        Text (Mines Remaining)
+        Text (Time Elapsed)
+        Text (Game Status)
+    GridView (Board)
+        Text (Various Symbols)
