@@ -88,9 +88,7 @@ class GameScreen extends StatelessWidget {
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.teal)
                   ),
-                  child: Center (
-                    child: Cell(displayedValue:'${snapshot.data[row][col]}'),
-                  ),
+                  child: Cell(displayedValue:'${snapshot.data[row][col]}'),
                 ),
                 onLongPress: () {
                   bloc.reveal(position);
