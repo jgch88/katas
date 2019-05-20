@@ -10,19 +10,29 @@ class GamestateBloc {
   final _gameStatus = BehaviorSubject<String>();
   final _board = BehaviorSubject<List<List<String>>>();
 
+  Timer _timerInstance;
+
   Observable<int> get minesRemaining => _minesRemaining.stream;
   Observable<int> get timer => _timer.stream;
   Observable<String> get gameStatus => _gameStatus.stream;
   Observable<List<List<String>>> get board => _board.stream;
 
   GamestateBloc() {
+    this.newGame();
+  }
+
+  newGame() {
     _minesweeper.new_game();
     _timer.sink.add(_minesweeper.time_elapsed());
     _gameStatus.sink.add(_minesweeper.status());
     _minesRemaining.sink.add(_minesweeper.mines_remaining());
     _board.sink.add(_minesweeper.view_board());
 
-    Timer.periodic(Duration(milliseconds:50), (Timer timer) {
+    if (this._timerInstance != null) {
+      this._timerInstance.cancel();
+    }
+
+    this._timerInstance = Timer.periodic(Duration(milliseconds:50), (Timer timer) {
       if (_minesweeper.status() != 'Playing') {
         timer.cancel();
       }
@@ -56,5 +66,7 @@ class GamestateBloc {
     _timer.close();
     _gameStatus.close();
     _board.close();
+
+    _timerInstance.cancel();
   }
 }
