@@ -45,18 +45,40 @@ class GameScreen extends StatelessWidget {
   }
 
   Widget drawInfoPanel(GamestateBloc bloc) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: <Widget>[
+        drawMinesRemaining(bloc),
+        drawTimer(bloc),
+        drawGameStatus(bloc),
+      ]
+    );
+  }
+
+  Widget drawMinesRemaining(GamestateBloc bloc) {
     return StreamBuilder(
-      stream: bloc.timer,
+      stream: bloc.minesRemaining,
       builder: (context, AsyncSnapshot<int> snapshot) {
-        return Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Text('Mines Remaining: $dummyMinesRemaining'),
-            Text('Time Elapsed: ${snapshot.data}'),
-            Text('Status: $dummyGameStatus'),
-          ]
-        );
+        return Text('Mines Remaining: ${snapshot.data}');
       }
+    );
+  }
+
+  Widget drawTimer(GamestateBloc bloc) {
+    return StreamBuilder(
+        stream: bloc.timer,
+        builder: (context, AsyncSnapshot<int> snapshot) {
+          return Text('Time Elapsed: ${snapshot.data}');
+        }
+    );
+  }
+
+  Widget drawGameStatus(GamestateBloc bloc) {
+    return StreamBuilder(
+        stream: bloc.gameStatus,
+        builder: (context, AsyncSnapshot<String> snapshot) {
+          return Text('Status: ${snapshot.data}');
+        }
     );
   }
 
