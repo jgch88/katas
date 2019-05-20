@@ -22,7 +22,10 @@ class GamestateBloc {
     _minesRemaining.sink.add(_minesweeper.mines_remaining());
     _board.sink.add(_minesweeper.view_board());
 
-    Timer.periodic(Duration(seconds:1), (Timer t) {
+    Timer.periodic(Duration(milliseconds:50), (Timer timer) {
+      if (_minesweeper.status() != 'Playing') {
+        timer.cancel();
+      }
       _timer.sink.add(_minesweeper.time_elapsed());
     });
   }
