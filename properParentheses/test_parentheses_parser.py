@@ -65,7 +65,18 @@ class TestParenthesesParser(unittest.TestCase):
         # shouldn't be able to close an opened bracket of a different type
         self.assertEqual(parser.validate('({)}'), False)
         self.assertEqual(parser.validation_error_position('({)}'), 2)
-        # ({a}: [abc])
 
-
+    def test_parser_fuzz_testing(self):
+        parser = ParenthesesParser()
+        self.assertEqual(parser.validate('{foo: (bar,baz)}'), True)
+        self.assertEqual(parser.validate('<html></html'), False)
+        self.assertEqual(parser.validate('''
+        {
+            "some": {
+                "kind": {
+                    "of": ["malformed", "json"]
+                }
+            }
+        
+            '''), False)
 
