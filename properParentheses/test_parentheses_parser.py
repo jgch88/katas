@@ -24,3 +24,7 @@ class TestParenthesesParser(unittest.TestCase):
 
         self.assertEqual(parser.validate('()'), True)
 
+    def test_parser_validates_nested_parentheses_correctly(self):
+        parser = ParenthesesParser()
+        self.assertEqual(parser.validate(')('), False)
+
