@@ -28,3 +28,8 @@ class TestParenthesesParser(unittest.TestCase):
         parser = ParenthesesParser()
         self.assertEqual(parser.validate(')('), False)
 
+        self.assertEqual(parser.validate('((())())()'), True) # book example
+        self.assertEqual(parser.validate(')()('), False) # book example
+        self.assertEqual(parser.validate('())'), False) # book example
+
+
