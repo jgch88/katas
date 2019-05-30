@@ -31,5 +31,11 @@ class TestParenthesesParser(unittest.TestCase):
         self.assertEqual(parser.validate('((())())()'), True) # book example
         self.assertEqual(parser.validate(')()('), False) # book example
         self.assertEqual(parser.validate('())'), False) # book example
+        # ({)} should be wrong
 
+    def test_parser_can_validate_and_provide_more_information(self):
+        parser = ParenthesesParser()
+        # Design: if it returns -1, the string has no error
+        # otherwise, return index of first offending parentheses 0 to n-1
+        self.assertEqual(parser.validation_error_position('()', -1))
 
