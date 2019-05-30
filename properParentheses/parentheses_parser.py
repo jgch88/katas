@@ -56,19 +56,18 @@ class ParenthesesParser:
         for character in string:
             if character in self._opening_parentheses:
                 stack.append(character)
-            if character in self._closing_parentheses_pair.keys():
+            elif character in self._closing_parentheses_pair.keys():
+                # for a properly nested string, the closing bracket
+                # should be able to find the opening bracket on the top of the stack
                 try:
                     if stack.pop() != self._closing_parentheses_pair[character]:
                         return index
                 except IndexError:
-                    # index of closing bracket that doesn't have
-                    # a prior opening bracket
                     return index
             index += 1
 
-        # return last unclosed bracket's index
+        # stack should not be empty for a balanced string
         if stack:
-            # print('expected to close', stack[-1], 'at position', index)
             return index
 
         return -1

@@ -1,0 +1,20 @@
+Can probably refactor the data structure of self._opening_parentheses and 
+self._closing_parentheses_pair into a Pair object
+
+p = Pair(opening='(', closing=')')
+p2 = Pair(opening='<', closing='>')
+
+API:
+p.opening() # '('
+p.closing() # ')'
+self._pairs = [p, p2]
+
+e.g. find pair given character
+  next(p for p in self._pairs if self.opening() == '(')
+
+Other thoughts: this algorithm only works for brackets that are single characters
+due to the for loop. If we want brackets like "<%", "%>", e.g. in templating engines,
+we need to do a greedy match within the string so that <% is added to the stack and not <.
+
+Also: there's no validation to check that a character has only one role when adding custom brackets
+i.e. "<" cannot be a closing bracket if it is already an opening bracket.
