@@ -9,3 +9,8 @@ class TestParenthesesParser(unittest.TestCase):
     def test_parser_can_initialise(self):
         ParenthesesParser()
 
+    def test_parser_can_validate_a_bracket_string(self):
+        p = ParenthesesParser()
+        p.validate('')
+
+

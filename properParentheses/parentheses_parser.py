@@ -10,3 +10,6 @@ class ParenthesesParser:
 
     def __init__(self):
         pass
+
+    def validate(self, string):
+        pass
