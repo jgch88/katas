@@ -60,8 +60,10 @@ class TestParenthesesParser(unittest.TestCase):
 
     def test_parser_can_parse_multiple_bracket_combinations_correctly(self):
         parser = ParenthesesParser()
+        self.assertEqual(parser.validation_error_position('({})'), -1)
+        # shouldn't be able to close an opened bracket of a different type
+        self.assertEqual(parser.validation_error_position('({)}'), 2)
         # ({a}: [abc])
-        # ({)} should be wrong
 
 
 
