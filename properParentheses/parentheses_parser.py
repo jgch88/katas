@@ -30,25 +30,8 @@ class ParenthesesParser:
         Returns True if string provided has balanced and properly nested
         parentheses.
         """
-        # use a stack to validate whether string is valid
-        # if character is an opening bracket, push it onto the stack
-        # if character is a closing bracket, pop it off the stack.
-        stack = []
-        for character in string:
-            if character in self._opening_parentheses:
-                stack.append(character)
-            if character in self._closing_parentheses_pair.keys():
-                try:
-                    if stack.pop() != self._closing_parentheses_pair[character]:
-                        return False
-                except IndexError: # popping an empty list
-                    return False
-
-        # if stack is balanced (equal number of opening/closing brackets)
-        # stack at the end should be empty
-        if stack:
+        if not self.validation_error_position(string) == -1:
             return False
-
         return True
 
     def validation_error_position(self, string):
@@ -56,6 +39,9 @@ class ParenthesesParser:
         Returns -1 if string provided has balanced and properly nested
         parentheses. Otherwise, returns the position of the error.
         """
+        # use a stack to validate whether string is valid
+        # if character is an opening bracket, push it onto the stack
+        # if character is a closing bracket, pop it off the stack.
         index = 0
         stack = []
 
