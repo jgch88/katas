@@ -1,3 +1,8 @@
+"""Parser classes.
+
+Contains ParenthesesParser to validate strings.
+
+"""
 # Skiena (Algorithm Design Manual) Exercise 3-1
 class ParenthesesParser:
     """
@@ -21,6 +26,10 @@ class ParenthesesParser:
         }
 
     def validate(self, string):
+        """
+        Returns True if string provided has balanced and properly nested
+        parentheses.
+        """
         # use a stack to validate whether string is valid
         # if character is an opening bracket, push it onto the stack
         # if character is a closing bracket, pop it off the stack.
@@ -37,13 +46,16 @@ class ParenthesesParser:
 
         # if stack is balanced (equal number of opening/closing brackets)
         # stack at the end should be empty
-        if len(stack) != 0:
+        if stack:
             return False
 
         return True
 
     def validation_error_position(self, string):
-        result = -1
+        """
+        Returns -1 if string provided has balanced and properly nested
+        parentheses. Otherwise, returns the position of the error.
+        """
         index = 0
         stack = []
 
@@ -55,15 +67,14 @@ class ParenthesesParser:
                     if stack.pop() != self._closing_parentheses_pair[character]:
                         return index
                 except IndexError:
-                    # index of closing bracket that doesn't have 
+                    # index of closing bracket that doesn't have
                     # a prior opening bracket
                     return index
             index += 1
 
         # return last unclosed bracket's index
-        if len(stack) != 0:
+        if stack:
             # print('expected to close', stack[-1], 'at position', index)
             return index
 
         return -1
-
