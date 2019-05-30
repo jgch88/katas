@@ -26,7 +26,10 @@ class ParenthesesParser:
             if character in self._opening_parentheses:
                 stack.append(character)
             if character in self._closing_parentheses_pair.keys():
-                stack.pop()
+                try:
+                    stack.pop()
+                except IndexError: # popping an empty list
+                    return False
 
         # if stack is balanced (equal number of opening/closing brackets)
         # stack at the end should be empty
