@@ -83,3 +83,9 @@ class TestParenthesesParser(unittest.TestCase):
             }
         
             '''), False)
+
+    def test_parser_can_add_custom_bracket_pairs(self):
+        parser = ParenthesesParser()
+        parser.add_custom_bracket_pair(opening='o', closing='O')
+        self.assertEqual(parser.validate('o'), False)
+        self.assertEqual(parser.validate('oO'), True)

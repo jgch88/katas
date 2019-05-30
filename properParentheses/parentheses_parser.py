@@ -16,7 +16,6 @@ class ParenthesesParser:
     # Every left parentheses must have an accompanying right parentheses mapped as a dictionary
     def __init__(self):
         # Refactor later to allow user to define custom bracket pairs
-        # Maybe a tuple is more elegant?
         self._opening_parentheses = ['(', '[', '{', '<']
         self._closing_parentheses_pair = {
             ')': '(',
@@ -24,6 +23,15 @@ class ParenthesesParser:
             '}': '{',
             '>': '<',
         }
+
+    def add_custom_bracket_pair(self, opening, closing):
+        """
+        Allows user to add custom bracket pairs.
+
+        p.add_custom_bracket_pair(opening="<", closing=">")
+        """
+        self._opening_parentheses.append(opening)
+        self._closing_parentheses_pair[closing] = opening
 
     def validate(self, string):
         """
