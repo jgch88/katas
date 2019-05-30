@@ -16,7 +16,6 @@ class TestParenthesesParser(unittest.TestCase):
     def test_parser_can_validate_bracket_strings_correctly(self):
         parser = ParenthesesParser()
         self.assertEqual(parser.validate(''), True)
-        # (), )(, (abc) ((abc)) ({a}: [abc])
 
     def test_parser_validates_balanced_parentheses_correctly(self):
         parser = ParenthesesParser()
@@ -31,7 +30,6 @@ class TestParenthesesParser(unittest.TestCase):
         self.assertEqual(parser.validate('((())())()'), True) # book example
         self.assertEqual(parser.validate(')()('), False) # book example
         self.assertEqual(parser.validate('())'), False) # book example
-        # ({)} should be wrong
 
     def test_parser_can_validate_and_provide_more_information(self):
         parser = ParenthesesParser()
@@ -49,5 +47,17 @@ class TestParenthesesParser(unittest.TestCase):
 
         self.assertEqual(parser.validation_error_position('())'), 2) # book example
         self.assertEqual(parser.validation_error_position('((())())()'), -1) # book example
+
+    def test_parser_can_include_non_bracket_characters(self):
+        parser = ParenthesesParser()
+        self.assertEqual(parser.validate('(abc)'), True)
+
+    def test_parser_can_parse_other_types_of_brackets(self):
+        parser = ParenthesesParser()
+        self.assertEqual(parser.validate('[a,b,c]'), True)
+        self.assertEqual(parser.validate('{foo: "bar"}'), True)
+        # ({a}: [abc])
+        # ({)} should be wrong
+
 
 
