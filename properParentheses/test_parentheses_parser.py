@@ -44,6 +44,7 @@ class TestParenthesesParser(unittest.TestCase):
         # Or we have an unclosed open backet
         self.assertEqual(parser.validation_error_position('()('), 2)
         self.assertEqual(parser.validation_error_position('()(('), 3)
+        self.assertEqual(parser.validation_error_position('()(()'), 2)
 
         self.assertEqual(parser.validation_error_position('())'), 2) # book example
         self.assertEqual(parser.validation_error_position('((())())()'), -1) # book example
@@ -56,6 +57,9 @@ class TestParenthesesParser(unittest.TestCase):
         parser = ParenthesesParser()
         self.assertEqual(parser.validate('[a,b,c]'), True)
         self.assertEqual(parser.validate('{foo: "bar"}'), True)
+
+    def test_parser_can_parse_multiple_bracket_combinations_correctly(self):
+        parser = ParenthesesParser()
         # ({a}: [abc])
         # ({)} should be wrong
 
