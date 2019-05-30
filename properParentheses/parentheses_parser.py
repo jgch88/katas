@@ -59,7 +59,8 @@ class ParenthesesParser:
 
         # return last unclosed bracket's index
         if len(stack) != 0:
-            return index - 1
+            # print('expected to close', stack[-1], 'at position', index)
+            return index
 
         return -1
 

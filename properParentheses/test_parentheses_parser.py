@@ -41,10 +41,10 @@ class TestParenthesesParser(unittest.TestCase):
         # bracket before it
         self.assertEqual(parser.validation_error_position(')()('), 0) # book example
 
-        # Or we have an unclosed open backet
-        self.assertEqual(parser.validation_error_position('()('), 2)
-        self.assertEqual(parser.validation_error_position('()(('), 3)
-        self.assertEqual(parser.validation_error_position('()(()'), 2)
+        # Or we have an unclosed open backet, where the closing bracket should be
+        self.assertEqual(parser.validation_error_position('()('), 3)
+        self.assertEqual(parser.validation_error_position('()(('), 4)
+        self.assertEqual(parser.validation_error_position('()(()'), 5)
 
         self.assertEqual(parser.validation_error_position('())'), 2) # book example
         self.assertEqual(parser.validation_error_position('((())())()'), -1) # book example
