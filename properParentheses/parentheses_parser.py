@@ -21,7 +21,6 @@ class ParenthesesParser:
         # if character is an opening bracket, push it onto the stack
         # if character is a closing bracket, pop it off the stack.
         stack = []
-        index = 0
         for character in string:
             if character in self._opening_parentheses:
                 stack.append(character)
@@ -37,3 +36,27 @@ class ParenthesesParser:
             return False
 
         return True
+
+    def validation_error_position(self, string):
+        result = -1
+        index = 0
+        stack = []
+
+        for character in string:
+            if character in self._opening_parentheses:
+                stack.append(character)
+            if character in self._closing_parentheses_pair.keys():
+                try:
+                    stack.pop()
+                except IndexError:
+                    # index of closing bracket that doesn't have 
+                    # a prior opening bracket
+                    return index
+            index += 1
+
+        # return last unclosed bracket's index
+        if len(stack) != 0:
+            return index - 1
+
+        return -1
+
