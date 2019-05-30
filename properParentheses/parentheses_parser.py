@@ -29,7 +29,8 @@ class ParenthesesParser:
                 stack.append(character)
             if character in self._closing_parentheses_pair.keys():
                 try:
-                    stack.pop()
+                    if stack.pop() != self._closing_parentheses_pair[character]:
+                        return False
                 except IndexError: # popping an empty list
                     return False
 
@@ -50,7 +51,8 @@ class ParenthesesParser:
                 stack.append(character)
             if character in self._closing_parentheses_pair.keys():
                 try:
-                    stack.pop()
+                    if stack.pop() != self._closing_parentheses_pair[character]:
+                        return index
                 except IndexError:
                     # index of closing bracket that doesn't have 
                     # a prior opening bracket
