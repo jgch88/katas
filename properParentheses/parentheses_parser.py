@@ -25,6 +25,8 @@ class ParenthesesParser:
         for character in string:
             if character in self._opening_parentheses:
                 stack.append(character)
+            if character in self._closing_parentheses_pair.keys():
+                stack.pop()
 
         # if stack is balanced (equal number of opening/closing brackets)
         # stack at the end should be empty

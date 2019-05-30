@@ -22,3 +22,5 @@ class TestParenthesesParser(unittest.TestCase):
         parser = ParenthesesParser()
         self.assertEqual(parser.validate('('), False)
 
+        self.assertEqual(parser.validate('()'), True)
+
