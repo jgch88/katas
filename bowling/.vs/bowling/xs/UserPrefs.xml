@@ -1,9 +1,10 @@
 ﻿<Properties StartupConfiguration="{22B7475C-5DDE-4098-BA2C-9AC8961982A8}|Default">
   <MonoDevelop.Ide.Workbench ActiveDocument="Game.cs">
     <Files>
-      <File FileName="BowlingTest.cs" Line="15" Column="2" />
-      <File FileName="Game.cs" Line="3" Column="25" />
+      <File FileName="BowlingTest.cs" Line="44" Column="2" />
+      <File FileName="Game.cs" Line="3" Column="18" />
       <File FileName="Notes" Line="1" Column="1" />
+      <File FileName="Frame.cs" Line="2" Column="18" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">

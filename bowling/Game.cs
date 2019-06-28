@@ -1,20 +1,30 @@
 using System;
+using System.Collections.Generic;
 
 namespace Bowling
 {   
     public class Game
     {
-        public int score { get; internal set; }
-
-        public void roll(string score)
-        {
-            int s = Int32.Parse(score);
-            this.score += s;
-        }
+        private int _score;
+        private int _currentFrameNumber;
+        private List<Frame> _frames;
 
         public Game()
         {
-            this.score = 0;
+            _score = 0;
+            _currentFrameNumber = 0;
+            _frames = new List<Frame>();
+            _frames.Add(new Frame());
+        }
+
+        public void Roll(int score)
+        {
+            _score += score;
+        }
+
+        public int Score()
+        {
+            return _score;
         }
     }
 }
