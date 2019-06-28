@@ -2,3 +2,5 @@
 *.swo
 env/
 __pycache__/
+bin/
+obj/
