@@ -20,11 +20,6 @@ namespace Bowling
                 throw new Exception("Can't add roll to a full frame!");
             }
 
-            if (IsStrike())
-            {
-                throw new Exception("You cannot add a second roll to a frame containing a strike!");
-            }
-
             _rolls.Add(roll);
 
             if (TotalRollsMoreThan10())
@@ -38,9 +33,9 @@ namespace Bowling
             return _rolls.Count == 1 && _rolls.Sum(roll => roll) == 10;
         }
 
-        private bool IsFull()
+        public bool IsFull()
         {
-            return _rolls.Count == 2;
+            return _rolls.Count == 2 || FirstRoll() == 10;
         }
 
         private bool TotalRollsMoreThan10()
@@ -66,6 +61,7 @@ namespace Bowling
 
         public int Score()
         {
+            // only the total pins knocked down, no bonuses involved
             return _rolls.Sum(roll => roll);
         }
     }

@@ -41,6 +41,28 @@ namespace UnitTests
             game.Roll(2);
             Assert.Equal(20, game.Score());
         }
+
+        [Fact]
+        public void TestGameCanScoreStrikes()
+        {
+            Game game = new Game();
+            game.Roll(10); // 10 + (10 + 5) = 25
+            game.Roll(10); // 10 + (5 + 2) = 17
+            game.Roll(5); // 5 + 2 = 7
+            game.Roll(2);
+            Assert.Equal(49, game.Score());
+        }
+
+        [Fact]
+        public void TestGameCanScorePerfectGame()
+        {
+            Game game = new Game();
+            for (int i = 0; i < 12; i++)
+            {
+                game.Roll(10);
+            }
+            Assert.Equal(300, game.Score());
+        }
     }
 
     public class FrameTests
@@ -75,9 +97,9 @@ namespace UnitTests
         public void TestFrameCannotAddSecondRollIfFirstRollIsStrike()
         {
             Frame frame = new Frame();
-            frame.AddRoll(10);
+            frame.AddRoll(10); // a strike is a full frame
             var exception = Assert.Throws<Exception>(() => frame.AddRoll(0));
-            Assert.Equal("You cannot add a second roll to a frame containing a strike!", exception.Message);
+            Assert.Equal("Can't add roll to a full frame!", exception.Message);
         }
 
         [Fact]
@@ -114,6 +136,24 @@ namespace UnitTests
             frame.AddRoll(5);
             frame.AddRoll(3);
             Assert.Equal(8, frame.Score());
+        }
+
+        [Fact]
+        public void TestFrameCanQueryIfItIsFull()
+        {
+            Frame frame = new Frame();
+            frame.AddRoll(5);
+            Assert.False(frame.IsFull());
+            frame.AddRoll(3);
+            Assert.True(frame.IsFull());
+        }
+
+        [Fact]
+        public void TestFrameStrikeIsAFullFrame()
+        {
+            Frame frame = new Frame();
+            frame.AddRoll(10);
+            Assert.True(frame.IsFull());
         }
 
         // is spare
