@@ -64,7 +64,19 @@ namespace UnitTests
             Assert.Equal(300, game.Score());
         }
 
-        // test spare for bonus 10th frame
+        [Fact]
+        public void TestGameCanScoreSpareOnLastFrame()
+        {
+            Game game = new Game();
+            for (int i = 0; i < 9; i++)
+            {
+                game.Roll(10);
+            }
+            game.Roll(9);
+            game.Roll(1);
+            game.Roll(10);
+            Assert.Equal(279, game.Score());
+        }
     }
 
     public class FrameTests
