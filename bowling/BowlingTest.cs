@@ -56,6 +56,7 @@ namespace UnitTests
         [Fact]
         public void TestGameCanScorePerfectGame()
         {
+            // Suggested Kata Test Case
             Game game = new Game();
             for (int i = 0; i < 12; i++)
             {
@@ -76,6 +77,33 @@ namespace UnitTests
             game.Roll(1);
             game.Roll(10);
             Assert.Equal(279, game.Score());
+        }
+
+        [Fact]
+        public void TestTenPairsOfFiveAndSpareWithFinalFive()
+        {
+            // Suggested Kata Test Case
+            Game game = new Game();
+            for (int i = 0; i < 10; i++)
+            {
+                game.Roll(5);
+                game.Roll(5);
+            }
+            game.Roll(5);
+            Assert.Equal(150, game.Score());
+        }
+
+        [Fact]
+        public void TestTenPairsOfNineAndMiss()
+        {
+            // Suggested Kata Test Case
+            Game game = new Game();
+            for (int i = 0; i < 10; i++)
+            {
+                game.Roll(9);
+                game.Roll(0);
+            }
+            Assert.Equal(90, game.Score());
         }
     }
 
