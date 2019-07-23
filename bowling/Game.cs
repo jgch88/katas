@@ -7,7 +7,6 @@ namespace Bowling
     {
         private int _currentFrameNumber;
         private List<Frame> _frames;
-        private enum BonusPointStatuses { None, Spare, Strike };
 
         public Game()
         {
@@ -32,37 +31,53 @@ namespace Bowling
 
         public int Score()
         {
-            int pinPoints = 0; // number of pins that were knocked down
-            int bonusPoints = 0; // extra points from spares/strikes
-            BonusPointStatuses previousFrameBonusPointStatus = BonusPointStatuses.None;
-            foreach (Frame frame in _frames)
+            // To calculate the score, we get the score of each frame.
+            // To get the score of each frame, we add its pins, and we add bonus points.
+            // To get spare bonus points, we add the first roll of the next frame.
+            // To get strike bonus points, if the next frame is a strike, we add that frame's score
+            // and the next next frame's first roll
+            // else we just add the next frame's score.
+            int pinPoints = 0;
+            int sparePoints = 0;
+            int strikePoints = 0;
+
+            int framesToScore = Math.Min(_frames.Count, 10); // Don't score bonus frames
+
+            for (int i = 0; i < framesToScore; i++)
             {
-                pinPoints += frame.Score();
-                bonusPoints += CalculateBonusPoints(frame, previousFrameBonusPointStatus);
-                // refactor to use explicit classes!
-                if (frame.IsSpare())
+                pinPoints += _frames[i].Score();
+                if (_frames[i].IsSpare())
                 {
-                    previousFrameBonusPointStatus = BonusPointStatuses.Spare;
-                }
-                else
+                    sparePoints += CalculateSpareBonusPoints(i);
+                } 
+                else if (_frames[i].IsStrike())
                 {
-                    previousFrameBonusPointStatus = BonusPointStatuses.None;
+                    strikePoints += CalculateStrikeBonusPoints(i);
                 }
             }
-            return pinPoints + bonusPoints;
+            return pinPoints + sparePoints + strikePoints;
         }
 
-        private int CalculateBonusPoints(Frame frame, BonusPointStatuses previousFrame)
+        private int CalculateSpareBonusPoints(int frameIndex)
         {
-            // base case (no bonus): 0
-            // spare: add only first roll
-            // strike: add next two rolls
-            if (previousFrame == BonusPointStatuses.Spare)
+            return _frames[frameIndex+ 1].FirstRoll();
+        }
+
+        private int CalculateStrikeBonusPoints(int frameIndex)
+        {
+            int strikeBonusForFrame = 0;
+
+            if (_frames[frameIndex + 1].IsStrike())
             {
-                return frame.FirstRoll();
+                strikeBonusForFrame += _frames[frameIndex + 1].Score();
+                strikeBonusForFrame += _frames[frameIndex + 2].FirstRoll();
+            }
+            else
+            {
+                strikeBonusForFrame += _frames[frameIndex + 1].Score();
             }
 
-            return 0;
+            return strikeBonusForFrame; 
         }
     }
 }

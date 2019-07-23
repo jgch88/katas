@@ -64,5 +64,10 @@ namespace Bowling
             // only the total pins knocked down, no bonuses involved
             return _rolls.Sum(roll => roll);
         }
+
+        public int NoOfRolls()
+        {
+            return _rolls.Count;
+        }
     }
 }

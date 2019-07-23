@@ -26,9 +26,9 @@ namespace UnitTests
         public void TestGameCanScoreTwoRolls()
         {
             Game game = new Game();
-            game.Roll(9);
-            game.Roll(1);
-            Assert.Equal(10, game.Score());
+            game.Roll(3);
+            game.Roll(4);
+            Assert.Equal(7, game.Score());
         }
 
         [Fact]
@@ -63,6 +63,8 @@ namespace UnitTests
             }
             Assert.Equal(300, game.Score());
         }
+
+        // test spare for bonus 10th frame
     }
 
     public class FrameTests
@@ -156,10 +158,16 @@ namespace UnitTests
             Assert.True(frame.IsFull());
         }
 
-        // is spare
-        // is strike
+        [Fact]
+        public void TestFrameCanCountNumberOfRolls()
+        {
+            Frame frame = new Frame();
+            frame.AddRoll(1);
+            Assert.Equal(1, frame.NoOfRolls());
+            frame.AddRoll(1);
+            Assert.Equal(2, frame.NoOfRolls());
+        }
         // frame number #?
         // test coverage?
-        // 3 rolls for last frame if double strikes
     }
 }

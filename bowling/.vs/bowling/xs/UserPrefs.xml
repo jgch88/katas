@@ -1,10 +1,10 @@
 ﻿<Properties StartupConfiguration="{22B7475C-5DDE-4098-BA2C-9AC8961982A8}|Default">
   <MonoDevelop.Ide.Workbench ActiveDocument="Game.cs">
     <Files>
-      <File FileName="BowlingTest.cs" Line="44" Column="2" />
-      <File FileName="Game.cs" Line="14" Column="24" />
-      <File FileName="Notes" Line="1" Column="1" />
-      <File FileName="Frame.cs" Line="2" Column="14" />
+      <File FileName="BowlingTest.cs" Line="66" Column="9" />
+      <File FileName="Game.cs" Line="27" Column="42" />
+      <File FileName="Notes" Line="1" Column="29" />
+      <File FileName="Frame.cs" Line="46" Column="23" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -16,9 +16,14 @@
           </Node>
         </State>
       </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
       <Pad Id="MonoDevelop.UnitTesting.TestPad">
         <State name="__root__">
-          <Node name="bowling" expanded="True" selected="True" />
+          <Node name="bowling" expanded="True">
+            <Node name="bowling" selected="True" />
+          </Node>
         </State>
       </Pad>
     </Pads>
