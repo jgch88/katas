@@ -77,16 +77,27 @@ describe("Gilded Rose Characterisation Tests", function() {
     expect(items[0].quality).toEqual(12);
   });
 
-  it("decreases Normal item quality faster fter sell by date", () => {
-    const gildedRose = new Shop([ new Item("Normal Item", -1, 10) ]);
+  it("decreases Normal item quality faster after sell by date", () => {
+    const gildedRose = new Shop([ new Item("Normal Item", -1, 10),
+      new Item("Sulfuras, Hand of Ragnaros", -1, 80), // for line 45's else branch
+      new Item("Aged Brie", -1, 50), // for line 53's else branch
+    ]);
     const items = gildedRose.updateQuality();
     expect(items[0].quality).toEqual(8);
+    expect(items[1].quality).toEqual(80);
+    expect(items[2].quality).toEqual(50);
   });
 
   it("Backstage pass cannot increase above 50 in quality", () => {
     const gildedRose = new Shop([ new Item("Backstage passes to a TAFKAL80ETC concert", 5, 49) ])
     const items = gildedRose.updateQuality();
     expect(items[0].quality).toEqual(50);
+  });
+
+  it("Shop creates empty list", () => {
+    const gildedRose = new Shop();
+    const items = gildedRose.updateQuality();
+    expect(items).toEqual([]);
   });
 
 });
