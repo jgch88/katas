@@ -27,31 +27,43 @@ class Shop {
           this.items[i].quality = this.items[i].quality - 1;
         }
       }
+
+      const pastSellByDate = () => {
+        return this.items[i].sellIn < 0;
+      }
+
+      const sellInTenDaysOrLess = () => {
+        return this.items[i].sellIn < 11;
+      }
+
+      const sellInFiveDaysOrLess = () => {
+        return this.items[i].sellIn < 6;
+      }
       
       if (this.items[i].name === 'Sulfuras, Hand of Ragnaros') {
         // do nothing
       } else if (this.items[i].name === 'Aged Brie') {
         decreaseSellIn();
         increaseQualityByOneToMaxOf50();
-        if (this.items[i].sellIn < 0) {
+        if (pastSellByDate()) {
           increaseQualityByOneToMaxOf50();
         }
       } else if (this.items[i].name === 'Backstage passes to a TAFKAL80ETC concert') {
         decreaseSellIn();
         increaseQualityByOneToMaxOf50();
-        if (this.items[i].sellIn < 11) {
+        if (sellInTenDaysOrLess()) {
           increaseQualityByOneToMaxOf50();
         }
-        if (this.items[i].sellIn < 6) {
+        if (sellInFiveDaysOrLess()) {
           increaseQualityByOneToMaxOf50();
         }
-        if (this.items[i].sellIn < 0) {
+        if (pastSellByDate()) {
           this.items[i].quality = 0;
         }
       } else {
         decreaseSellIn();
         reduceQualityByOneToMinOf0();
-        if (this.items[i].sellIn < 0) {
+        if (pastSellByDate()) {
           reduceQualityByOneToMinOf0();
         }
       }
