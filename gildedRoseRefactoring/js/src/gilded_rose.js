@@ -21,6 +21,12 @@ class Shop {
           this.items[i].quality = this.items[i].quality + 1;
         }
       }
+
+      const reduceQualityByOneToMinOf0 = () => {
+        if (this.items[i].quality > 0) {
+          this.items[i].quality = this.items[i].quality - 1;
+        }
+      }
       
       if (this.items[i].name === 'Sulfuras, Hand of Ragnaros') {
         // do nothing
@@ -44,13 +50,9 @@ class Shop {
         }
       } else {
         decreaseSellIn();
-        if (this.items[i].quality > 0) {
-          this.items[i].quality = this.items[i].quality - 1;
-        }
+        reduceQualityByOneToMinOf0();
         if (this.items[i].sellIn < 0) {
-          if (this.items[i].quality > 0) {
-            this.items[i].quality = this.items[i].quality - 1;
-          }
+          reduceQualityByOneToMinOf0();
         }
       }
     }
