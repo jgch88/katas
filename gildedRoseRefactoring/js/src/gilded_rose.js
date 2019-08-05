@@ -40,7 +40,7 @@ class Shop {
           increaseQualityByOneToMaxOf50();
         }
         if (this.items[i].sellIn < 0) {
-          this.items[i].quality = this.items[i].quality - this.items[i].quality;
+          this.items[i].quality = 0;
         }
       } else {
         decreaseSellIn();
